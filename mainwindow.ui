@@ -91,6 +91,8 @@
    <addaction name="actionNewProject"/>
    <addaction name="actionEdit_Project"/>
    <addaction name="actionRemove_Project"/>
+   <addaction name="separator"/>
+   <addaction name="actionNew_Event"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">

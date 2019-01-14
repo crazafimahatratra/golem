@@ -314,7 +314,7 @@ void MainWindow::on_treeWidgetEvents_customContextMenuRequested(const QPoint &po
 
 void MainWindow::on_actionNew_Event_triggered()
 {
-    DialogEvent dialog(this);
+    DialogEvent dialog(0, this);
     dialog.exec();
 }
 

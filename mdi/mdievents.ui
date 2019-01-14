@@ -29,6 +29,9 @@
     </property>
     <item>
      <widget class="QTreeWidget" name="treeWidget">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
       <property name="alternatingRowColors">
        <bool>true</bool>
       </property>
@@ -64,6 +67,7 @@
    </attribute>
    <addaction name="actionNew_Event"/>
    <addaction name="actionRemove_Event"/>
+   <addaction name="actionEdit_Event"/>
   </widget>
   <action name="actionNew_Event">
    <property name="icon">
@@ -84,6 +88,15 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+  </action>
+  <action name="actionEdit_Event">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/calendar--pencil.png</normaloff>:/png/icons/calendar--pencil.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit Event</string>
    </property>
   </action>
  </widget>

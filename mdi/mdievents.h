@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QDateTime>
+#include <QMenu>
 #include "mainwindow.h"
 #include "models/event.h"
 #include "models/project.h"
@@ -30,10 +31,20 @@ private slots:
 
     void on_actionRemove_Event_triggered();
 
+    void on_actionEdit_Event_triggered();
+
+    void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *, int);
+
+    void on_treeWidget_itemSelectionChanged();
+
+    void on_treeWidget_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::MdiEvents *ui;
     QDate m_date;
     MainWindow *m_parent;
+    QMenu *m_menuEvents = nullptr;
+    void updateMenu();
     void cleanTopLevelItems();
     void addProjectsToTree();
     void cleanEmptyProjects();

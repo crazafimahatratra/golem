@@ -14,7 +14,7 @@ class DialogEvent : public QDialog
     Q_OBJECT
 
 public:
-    explicit DialogEvent(MainWindow *parent = 0);
+    explicit DialogEvent(int id, MainWindow *parent = 0);
     ~DialogEvent();
 
 private slots:

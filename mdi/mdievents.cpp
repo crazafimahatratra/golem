@@ -8,13 +8,18 @@ MdiEvents::MdiEvents(QDate date, MainWindow *parent) :
     QMainWindow(parent),
     ui(new Ui::MdiEvents),
     m_date(date),
-    m_parent(parent)
+    m_parent(parent),
+    m_menuEvents(new QMenu(this))
 {
     ui->setupUi(this);
     setWindowTitle("Events " + m_date.toString("yyyy-MM-dd"));
     fillEvents();
     connect(m_parent, &MainWindow::eventUpdated, this, &MdiEvents::on_eventUpdated);
     connect(m_parent, &MainWindow::eventDeleted, this, &MdiEvents::on_eventDeleted);
+
+    m_menuEvents->addAction(ui->actionNew_Event);
+    m_menuEvents->addAction(ui->actionEdit_Event);
+    m_menuEvents->addAction(ui->actionRemove_Event);
 }
 
 MdiEvents::~MdiEvents()
@@ -78,6 +83,7 @@ void MdiEvents::fillEvents()
     }
     delete model;
     cleanEmptyProjects();
+    updateMenu();
 }
 
 void MdiEvents::addEventToTree(Event *row)
@@ -117,7 +123,7 @@ QString MdiEvents::selectedEventTitle()
 
 void MdiEvents::on_actionNew_Event_triggered()
 {
-    DialogEvent dialog(m_parent);
+    DialogEvent dialog(0, m_parent);
     dialog.exec();
 }
 
@@ -153,4 +159,35 @@ void MdiEvents::on_actionRemove_Event_triggered()
         emit m_parent->eventDeleted(p->id, p->project_id, p->evedate);
         delete p;
     }
+}
+
+void MdiEvents::on_actionEdit_Event_triggered()
+{
+    int id = selectedEventId();
+    if(!id)
+        return;
+    DialogEvent dialog(id, m_parent);
+    dialog.exec();
+}
+
+void MdiEvents::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *, int)
+{
+    on_actionEdit_Event_triggered();
+}
+
+void MdiEvents::updateMenu()
+{
+    bool eventSelected = selectedEventId() > 0;
+    ui->actionEdit_Event->setEnabled(eventSelected);
+    ui->actionRemove_Event->setEnabled(eventSelected);
+}
+
+void MdiEvents::on_treeWidget_itemSelectionChanged()
+{
+    updateMenu();
+}
+
+void MdiEvents::on_treeWidget_customContextMenuRequested(const QPoint &pos)
+{
+    m_menuEvents->popup(ui->treeWidget->mapToGlobal(pos));
 }

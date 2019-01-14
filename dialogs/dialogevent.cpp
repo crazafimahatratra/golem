@@ -2,23 +2,33 @@
 #include "ui_dialogevent.h"
 #include "models/project.h"
 
-DialogEvent::DialogEvent(MainWindow *parent) :
+DialogEvent::DialogEvent(int id, MainWindow *parent) :
     QDialog(parent),
     ui(new Ui::DialogEvent),
     m_parent(parent)
 {
     ui->setupUi(this);
 
-    m_event = new Event();
-    m_event->id = 0;
+    m_event = Event::findById<Event>(id);
+    if(!m_event) {
+        m_event = new Event();
+        m_event->id = 0;
+        m_event->project_id = 0;
+        m_event->evedate = QDateTime::currentDateTime();
+    }
 
     QList<Project *> rows = Project::getAll<Project>();
     for(int i = 0; i < rows.length(); i++)
     {
         ui->comboBoxProjects->addItem(rows[i]->name, rows[i]->id);
+        if(m_event->project_id == rows[i]->id)
+            ui->comboBoxProjects->setCurrentIndex(i);
         delete rows[i];
     }
-    ui->dateTimeEdit->setDateTime(QDateTime::currentDateTime());
+
+    ui->dateTimeEdit->setDateTime(m_event->evedate);
+    ui->lineEditTitle->setText(m_event->title);
+    ui->textEditContent->setHtml(m_event->content);
 }
 
 DialogEvent::~DialogEvent()
