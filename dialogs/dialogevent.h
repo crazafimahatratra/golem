@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include "mainwindow.h"
+#include "models/event.h"
 
 namespace Ui {
 class DialogEvent;
@@ -24,6 +25,7 @@ private slots:
 private:
     Ui::DialogEvent *ui;
     MainWindow *m_parent;
+    Event *m_event;
 };
 
 #endif // DIALOGEVENT_H

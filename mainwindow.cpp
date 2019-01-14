@@ -8,6 +8,7 @@
 #include "models/project.h"
 #include <QMessageBox>
 #include <QMdiSubWindow>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     fillTreeCollections();
 
     m_MenuTreeWidgetEvents->addAction(ui->actionNew_Event);
+    fillTreeEvents();
 
     connect(this, &MainWindow::collectionUpdated, this, &MainWindow::fillTreeCollections);
     connect(this, &MainWindow::collectionDeleted, this, &MainWindow::fillTreeCollections);
@@ -83,6 +85,20 @@ void MainWindow::fillTreeCollections()
         ui->treeWidgetCollections->resizeColumnToContents(i);
 }
 
+void MainWindow::fillTreeEvents()
+{
+    QList<QDate> dates = Event::allDateEvents();
+    QTreeWidgetItem *root = ui->treeWidgetEvents->topLevelItem(0);
+    root->takeChildren();
+    for(int i = 0; i < dates.length(); i++)
+    {
+        this->addEventToTree(root, dates[i]);
+    }
+    ui->treeWidgetEvents->expandAll();
+    for(int i = 0; i < ui->treeWidgetEvents->columnCount(); i++)
+        ui->treeWidgetEvents->resizeColumnToContents(i);
+}
+
 void MainWindow::addProjectToTree(QTreeWidgetItem *root, Project *row)
 {
     QTreeWidgetItem *item = new QTreeWidgetItem(TREEVIEW_TYPE_PROJECT);
@@ -97,6 +113,39 @@ void MainWindow::addProjectToTree(QTreeWidgetItem *root, Project *row)
     item->setData(0, Qt::UserRole, row->id);
     item->setIcon(0, QIcon(":/png/icons/folder.png"));
     root->addChild(item);
+}
+
+void MainWindow::addEventToTree(QTreeWidgetItem *root, QDate date)
+{
+    QTreeWidgetItem *itemY = this->treeWidgetItemFromValue(root, date.year());
+    if(!itemY)
+    {
+        itemY = new QTreeWidgetItem(TREEVIEW_TYPE_YEAR);
+        itemY->setText(0, date.toString("yyyy"));
+        itemY->setData(0, Qt::UserRole, date.year());
+        itemY->setIcon(0, QIcon(":/png/icons/calendar.png"));
+        root->addChild(itemY);
+    }
+
+    QTreeWidgetItem *itemM = this->treeWidgetItemFromValue(itemY, date.month());
+    if(!itemM)
+    {
+        itemM = new QTreeWidgetItem(TREEVIEW_TYPE_MONTH);
+        itemM->setText(0, date.toString("MMM"));
+        itemM->setData(0, Qt::UserRole, date.month());
+        itemM->setIcon(0, QIcon(":/png/icons/calendar-select-month.png"));
+        itemY->addChild(itemM);
+    }
+
+    QTreeWidgetItem *itemD = this->treeWidgetItemFromValue(itemM, date.day());
+    if(!itemD)
+    {
+        itemD = new QTreeWidgetItem(TREEVIEW_TYPE_DAY);
+        itemD->setText(0, date.toString("dd/MM/yyyy"));
+        itemD->setData(0, Qt::UserRole, date.day());
+        itemD->setIcon(0, QIcon(":/png/icons/calendar-select.png"));
+        itemM->addChild(itemD);
+    }
 }
 
 void MainWindow::updateMenus()

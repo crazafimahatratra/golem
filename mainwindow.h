@@ -7,6 +7,9 @@
 #include "models/project.h"
 #define TREEVIEW_TYPE_COLLECTION 1
 #define TREEVIEW_TYPE_PROJECT 2
+#define TREEVIEW_TYPE_YEAR 3
+#define TREEVIEW_TYPE_MONTH 4
+#define TREEVIEW_TYPE_DAY 5
 
 namespace Ui {
 class MainWindow;
@@ -26,6 +29,8 @@ signals:
     void collectionDeleted(int collection_id);
     void taskUpdated(int task_id, int project_id);
     void taskDeleted(int task_id, int project_id);
+    void eventUpdated(int event_id, int project_id);
+    void eventDeleted(int event_id, int project_id);
 
 private slots:
     void on_action_Quitter_triggered();
@@ -58,7 +63,9 @@ private:
     QMenu *m_MenuTreeWidgetEvents;
     QMap<int, int> m_numTasksByProject;
     void fillTreeCollections();
+    void fillTreeEvents();
     void addProjectToTree(QTreeWidgetItem *root, Project *row);
+    void addEventToTree(QTreeWidgetItem *root, QDate date);
     void updateMenus();
     void updateMdiTabbar();
     void openProject(int project_id);

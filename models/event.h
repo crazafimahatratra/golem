@@ -37,6 +37,7 @@ public:
         parameters.append(QSqliteWrapper::Parameter("title", this->title));
         parameters.append(QSqliteWrapper::Parameter("evedate", this->evedate));
         parameters.append(QSqliteWrapper::Parameter("content", this->content));
+        return parameters;
     }
 
     int id;
@@ -44,6 +45,8 @@ public:
     QString title;
     QDateTime evedate;
     QString content;
+
+    static QList<QDate> allDateEvents();
 };
 
 #endif // EVENT_H

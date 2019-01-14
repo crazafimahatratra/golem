@@ -27,5 +27,7 @@
         <file>icons/clock.png</file>
         <file>icons/calendar--pencil.png</file>
         <file>icons/calendar--plus.png</file>
+        <file>icons/calendar-select.png</file>
+        <file>icons/calendar-select-month.png</file>
     </qresource>
 </RCC>

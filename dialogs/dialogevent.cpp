@@ -8,6 +8,10 @@ DialogEvent::DialogEvent(MainWindow *parent) :
     m_parent(parent)
 {
     ui->setupUi(this);
+
+    m_event = new Event();
+    m_event->id = 0;
+
     QList<Project *> rows = Project::getAll<Project>();
     for(int i = 0; i < rows.length(); i++)
     {
@@ -29,5 +33,14 @@ void DialogEvent::on_pushButtonCancel_clicked()
 
 void DialogEvent::on_pushButtonOK_clicked()
 {
+    m_event->project_id = ui->comboBoxProjects->currentData(Qt::UserRole).toInt();
+    m_event->title = ui->lineEditTitle->text();
+    m_event->evedate = ui->dateTimeEdit->dateTime();
+    m_event->content = ui->textEditContent->toHtml();
+    if(m_event->id)
+        m_event->update();
+    else
+        m_event->insert();
+    emit m_parent->eventUpdated(m_event->id, m_event->project_id);
     this->accept();
 }
