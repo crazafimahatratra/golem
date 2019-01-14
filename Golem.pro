@@ -37,7 +37,8 @@ SOURCES += \
     models/project.cpp \
     mdi/mdiproject.cpp \
     dialogs/dialogtask.cpp \
-    models/task.cpp
+    models/task.cpp \
+    dialogs/dialogevent.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -54,14 +55,16 @@ HEADERS += \
     mdi/mdiproject.h \
     dialogs/dialogtask.h \
     models/task.h \
-    constants.h
+    constants.h \
+    dialogs/dialogevent.h
 
 FORMS += \
         mainwindow.ui \
     dialogs/dialogcollection.ui \
     dialogs/dialogproject.ui \
     mdi/mdiproject.ui \
-    dialogs/dialogtask.ui
+    dialogs/dialogtask.ui \
+    dialogs/dialogevent.ui
 
 RC_FILE = resources.rc
 

@@ -50,6 +50,8 @@ private slots:
 
     void on_treeWidgetEvents_customContextMenuRequested(const QPoint &pos);
 
+    void on_actionNew_Event_triggered();
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;

@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "dialogs/dialogcollection.h"
 #include "dialogs/dialogproject.h"
+#include "dialogs/dialogevent.h"
 #include "mdi/mdiproject.h"
 #include "models/collection.h"
 #include "models/project.h"
@@ -231,4 +232,10 @@ void MainWindow::on_treeWidgetCollections_itemDoubleClicked(QTreeWidgetItem *ite
 void MainWindow::on_treeWidgetEvents_customContextMenuRequested(const QPoint &pos)
 {
     m_MenuTreeWidgetEvents->popup(ui->treeWidgetEvents->mapToGlobal(pos));
+}
+
+void MainWindow::on_actionNew_Event_triggered()
+{
+    DialogEvent dialog(this);
+    dialog.exec();
 }
