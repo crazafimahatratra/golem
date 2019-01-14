@@ -4,6 +4,7 @@
 #include "dialogs/dialogproject.h"
 #include "dialogs/dialogevent.h"
 #include "mdi/mdiproject.h"
+#include "mdi/mdievents.h"
 #include "models/collection.h"
 #include "models/project.h"
 #include <QMessageBox>
@@ -38,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::projectDeleted, this, &MainWindow::fillTreeCollections);
     connect(this, &MainWindow::taskUpdated, this, &MainWindow::fillTreeCollections);
     connect(this, &MainWindow::taskDeleted, this, &MainWindow::fillTreeCollections);
+    connect(this, &MainWindow::eventUpdated, this, &MainWindow::fillTreeEvents);
+    connect(this, &MainWindow::eventDeleted, this, &MainWindow::fillTreeEvents);
 }
 
 MainWindow::~MainWindow()
@@ -143,6 +146,7 @@ void MainWindow::addEventToTree(QTreeWidgetItem *root, QDate date)
         itemD = new QTreeWidgetItem(TREEVIEW_TYPE_DAY);
         itemD->setText(0, date.toString("dd/MM/yyyy"));
         itemD->setData(0, Qt::UserRole, date.day());
+        itemD->setData(1, Qt::UserRole, date);
         itemD->setIcon(0, QIcon(":/png/icons/calendar-select.png"));
         itemM->addChild(itemD);
     }
@@ -187,6 +191,31 @@ void MainWindow::openProject(int project_id)
     if(!win)
     {
         win = new MdiProject(project_id, this);
+        ui->mdiArea->addSubWindow(win);
+    }
+    win->showMaximized();
+    this->updateMdiTabbar();
+}
+
+void MainWindow::openEvents(QDate date)
+{
+    MdiEvents *win = nullptr;
+    QList<QMdiSubWindow*> subwindows = ui->mdiArea->subWindowList();
+    for(int i = 0; i < subwindows.length(); i++)
+    {
+        if (qobject_cast<MdiEvents*> (subwindows[i]->widget()))
+        {
+            MdiEvents *w = (MdiEvents *)(subwindows[i]->widget());
+            if(w->date() == date)
+            {
+                win = w;
+                break;
+            }
+        }
+    }
+    if(!win)
+    {
+        win = new MdiEvents(date, this);
         ui->mdiArea->addSubWindow(win);
     }
     win->showMaximized();
@@ -287,4 +316,11 @@ void MainWindow::on_actionNew_Event_triggered()
 {
     DialogEvent dialog(this);
     dialog.exec();
+}
+
+void MainWindow::on_treeWidgetEvents_itemDoubleClicked(QTreeWidgetItem *item, int)
+{
+    if(item->type() != TREEVIEW_TYPE_DAY)
+        return;
+    openEvents(item->data(1, Qt::UserRole).toDate());
 }

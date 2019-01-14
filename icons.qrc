@@ -29,5 +29,6 @@
         <file>icons/calendar--plus.png</file>
         <file>icons/calendar-select.png</file>
         <file>icons/calendar-select-month.png</file>
+        <file>icons/calendar--minus.png</file>
     </qresource>
 </RCC>

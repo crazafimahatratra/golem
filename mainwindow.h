@@ -4,12 +4,14 @@
 #include <QMainWindow>
 #include <QTreeWidgetItem>
 #include <QMap>
+#include <QDateTime>
 #include "models/project.h"
 #define TREEVIEW_TYPE_COLLECTION 1
 #define TREEVIEW_TYPE_PROJECT 2
 #define TREEVIEW_TYPE_YEAR 3
 #define TREEVIEW_TYPE_MONTH 4
 #define TREEVIEW_TYPE_DAY 5
+#define TREEVIEW_TYPE_EVENT 6
 
 namespace Ui {
 class MainWindow;
@@ -29,8 +31,8 @@ signals:
     void collectionDeleted(int collection_id);
     void taskUpdated(int task_id, int project_id);
     void taskDeleted(int task_id, int project_id);
-    void eventUpdated(int event_id, int project_id);
-    void eventDeleted(int event_id, int project_id);
+    void eventUpdated(int event_id, int project_id, QDateTime date, int old_project_id, QDateTime old_date);
+    void eventDeleted(int event_id, int project_id, QDateTime date);
 
 private slots:
     void on_action_Quitter_triggered();
@@ -57,6 +59,8 @@ private slots:
 
     void on_actionNew_Event_triggered();
 
+    void on_treeWidgetEvents_itemDoubleClicked(QTreeWidgetItem *item, int);
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;
@@ -69,6 +73,7 @@ private:
     void updateMenus();
     void updateMdiTabbar();
     void openProject(int project_id);
+    void openEvents(QDate date);
     QTreeWidgetItem *treeWidgetItemFromValue(QTreeWidgetItem *root, int value);
 };
 

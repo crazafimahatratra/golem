@@ -35,12 +35,19 @@ void DialogEvent::on_pushButtonOK_clicked()
 {
     m_event->project_id = ui->comboBoxProjects->currentData(Qt::UserRole).toInt();
     m_event->title = ui->lineEditTitle->text();
+    QDateTime old_date = m_event->evedate;
+    int old_project_id = m_event->project_id;
     m_event->evedate = ui->dateTimeEdit->dateTime();
     m_event->content = ui->textEditContent->toHtml();
     if(m_event->id)
+    {
         m_event->update();
+        emit m_parent->eventUpdated(m_event->id, m_event->project_id, m_event->evedate, old_project_id, old_date);
+    }
     else
+    {
         m_event->insert();
-    emit m_parent->eventUpdated(m_event->id, m_event->project_id);
+        emit m_parent->eventUpdated(m_event->id, m_event->project_id, m_event->evedate, m_event->project_id, m_event->evedate);
+    }
     this->accept();
 }
