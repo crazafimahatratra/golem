@@ -1,0 +1,9 @@
+* {
+    font-family: 'Open Sans';
+}
+
+QMainWindow::separator
+{
+    width: 5px;
+    border: 1px inset #A0A0A0;
+}

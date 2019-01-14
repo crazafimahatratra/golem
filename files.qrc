@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/sql">
+        <file>upgrade.sql</file>
+    </qresource>
+    <qresource prefix="/css">
+        <file>styles.css</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>fonts/oswald-v16-latin-700.ttf</file>
+        <file>fonts/oswald-v16-latin-regular.ttf</file>
+        <file>fonts/open-sans-v15-latin-700.ttf</file>
+        <file>fonts/open-sans-v15-latin-regular.ttf</file>
+    </qresource>
+</RCC>

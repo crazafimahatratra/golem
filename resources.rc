@@ -1,0 +1,32 @@
+IDI_ICON1   ICON    DISCARDABLE "icons/newicon.ico"
+
+#include <windows.h>
+#include "appversion.h"
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     APP_FILEVERSION
+PRODUCTVERSION  APP_FILEVERSION
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904E4"
+        BEGIN
+            VALUE "CompanyName",        APP_ORGANIZATION_NAME
+            VALUE "FileDescription",    APP_FILEDESCRIPTION_STR
+            VALUE "FileVersion",        APP_VERSION
+            VALUE "InternalName",       APP_NAME
+            VALUE "LegalCopyright",     APP_LEGALCOPYRIGHT_STR
+            VALUE "LegalTrademarks1",   APP_LEGALTRADEMARKS1_STR
+            VALUE "LegalTrademarks2",   APP_LEGALTRADEMARKS1_STR
+            VALUE "OriginalFilename",   APP_ORIGINALFILENAME_STR
+            VALUE "ProductName",        APP_NAME
+            VALUE "ProductVersion",     APP_VERSION
+            VALUE "Comments",           APP_FILEDESCRIPTION_STR
+        END
+    END
+
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x040C, 1252
+    END
+END

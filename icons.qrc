@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/png">
+        <file>icons/box--plus.png</file>
+        <file>icons/block--plus.png</file>
+        <file>icons/folder--plus.png</file>
+        <file>icons/block.png</file>
+        <file>icons/block--pencil.png</file>
+        <file>icons/box--minus.png</file>
+        <file>icons/box--pencil.png</file>
+        <file>icons/box.png</file>
+        <file>icons/block--minus.png</file>
+        <file>icons/folder--minus.png</file>
+        <file>icons/folder--pencil.png</file>
+        <file>icons/folder.png</file>
+        <file>icons/document--minus.png</file>
+        <file>icons/document--pencil.png</file>
+        <file>icons/document--plus.png</file>
+        <file>icons/document.png</file>
+        <file>icons/32/document.png</file>
+        <file>icons/calendar--arrow.png</file>
+        <file>icons/calendar--exclamation.png</file>
+        <file>icons/calendar.png</file>
+        <file>icons/tick-white.png</file>
+        <file>icons/tick.png</file>
+        <file>icons/clock-history.png</file>
+        <file>icons/clock--arrow.png</file>
+        <file>icons/clock.png</file>
+    </qresource>
+</RCC>

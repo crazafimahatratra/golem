@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MdiProject</class>
+ <widget class="QMainWindow" name="MdiProject">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>379</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLabel" name="labelCollectionName">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="font">
+         <font>
+          <family>Oswald</family>
+          <pointsize>16</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font-family: &quot;Oswald&quot;; font-size:16pt; font-weight: bold</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labelProjectName">
+        <property name="font">
+         <font>
+          <family>Oswald</family>
+          <pointsize>16</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">font-family: &quot;Oswald&quot;;font-size: 16pt</string>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTreeWidget" name="treeWidget">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Due Date</string>
+       </property>
+      </column>
+      <item>
+       <property name="text">
+        <string>Overdue</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/png/icons/calendar--exclamation.png</normaloff>:/png/icons/calendar--exclamation.png</iconset>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Today</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/png/icons/calendar.png</normaloff>:/png/icons/calendar.png</iconset>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Up Next</string>
+       </property>
+       <property name="font">
+        <font>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="icon">
+        <iconset resource="../icons.qrc">
+         <normaloff>:/png/icons/calendar--arrow.png</normaloff>:/png/icons/calendar--arrow.png</iconset>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionNewTask"/>
+   <addaction name="actionEdit_Task"/>
+   <addaction name="actionRemove_Task"/>
+   <addaction name="separator"/>
+   <addaction name="actionMark_As_Done"/>
+   <addaction name="actionRestart"/>
+   <addaction name="separator"/>
+   <addaction name="actionShow_All_History"/>
+  </widget>
+  <action name="actionNewTask">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/document--plus.png</normaloff>:/png/icons/document--plus.png</iconset>
+   </property>
+   <property name="text">
+    <string>NewTask</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionEdit_Task">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/document--pencil.png</normaloff>:/png/icons/document--pencil.png</iconset>
+   </property>
+   <property name="text">
+    <string>Edit Task</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+  <action name="actionRemove_Task">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/document--minus.png</normaloff>:/png/icons/document--minus.png</iconset>
+   </property>
+   <property name="text">
+    <string>Remove Task</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
+   </property>
+  </action>
+  <action name="actionMark_As_Done">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/tick.png</normaloff>:/png/icons/tick.png</iconset>
+   </property>
+   <property name="text">
+    <string>Mark As Complete</string>
+   </property>
+  </action>
+  <action name="actionRestart">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/clock--arrow.png</normaloff>:/png/icons/clock--arrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Restart</string>
+   </property>
+  </action>
+  <action name="actionShow_All_History">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/clock-history.png</normaloff>:/png/icons/clock-history.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show All History</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>
