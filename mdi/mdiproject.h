@@ -57,7 +57,7 @@ private slots:
 
     void on_projectDeleted(int project_id);
 
-    void on_taskUpdated(int, int project_id);
+    void on_taskUpdated(int, int project_id, int old_project_id);
 
     void on_taskDeleted(int, int project_id);
 

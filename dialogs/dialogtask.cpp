@@ -51,6 +51,7 @@ void DialogTask::on_pushButtonCancel_clicked()
 
 void DialogTask::on_pushButtonOK_clicked()
 {
+    int old_project_id = m_task->project_id;
     m_task->project_id = ui->comboBoxProject->currentData(Qt::UserRole).toInt();
     m_task->title = ui->lineEditTitle->text();
     m_task->dueDate = ui->dateTimeEditDueDate->dateTime();
@@ -58,11 +59,12 @@ void DialogTask::on_pushButtonOK_clicked()
     if(m_task->id)
     {
         m_task->update();
+        emit m_parent->taskUpdated(m_task->id, m_task->project_id, old_project_id);
     }
     else
     {
         m_task->insert();
+        emit m_parent->taskUpdated(m_task->id, m_task->project_id, m_task->project_id);
     }
-    emit m_parent->taskUpdated(m_task->id, m_task->project_id);
     this->accept();
 }

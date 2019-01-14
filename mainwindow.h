@@ -29,7 +29,7 @@ signals:
     void projectDeleted(int project_id);
     void collectionUpdated(int collection_id);
     void collectionDeleted(int collection_id);
-    void taskUpdated(int task_id, int project_id);
+    void taskUpdated(int task_id, int project_id, int old_project_id);
     void taskDeleted(int task_id, int project_id);
     void eventUpdated(int event_id, int project_id, QDateTime date, int old_project_id, QDateTime old_date);
     void eventDeleted(int event_id, int project_id, QDateTime date);

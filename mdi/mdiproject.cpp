@@ -206,7 +206,7 @@ void MdiProject::on_actionMark_As_Done_triggered()
         return;
     t->status = TASK_STATUS_FINISHED;
     t->update();
-    emit m_parent->taskUpdated(t->id, t->project_id);
+    emit m_parent->taskUpdated(t->id, t->project_id, t->project_id);
     delete t;
 }
 
@@ -221,7 +221,7 @@ void MdiProject::on_actionRestart_triggered()
         return;
     t->status = TASK_STATUS_STARTED;
     t->update();
-    emit m_parent->taskUpdated(t->id, t->project_id);
+    emit m_parent->taskUpdated(t->id, t->project_id, t->project_id);
     delete t;
 }
 
@@ -261,9 +261,9 @@ void MdiProject::on_projectDeleted(int project_id)
     this->parentWidget()->close();
 }
 
-void MdiProject::on_taskUpdated(int, int project_id)
+void MdiProject::on_taskUpdated(int, int project_id, int old_project_id)
 {
-    if(project_id != m_project->id)
+    if(old_project_id != m_project->id && project_id != m_project->id)
         return;
     this->fillTasks();
 }
