@@ -263,7 +263,7 @@ void MdiProject::on_projectDeleted(int project_id)
 
 void MdiProject::on_taskUpdated(int, int project_id, int old_project_id)
 {
-    if(old_project_id != m_project->id && project_id != m_project->id)
+    if((old_project_id != m_project->id) && (project_id != m_project->id))
         return;
     this->fillTasks();
 }
