@@ -25,5 +25,7 @@
         <file>icons/clock-history.png</file>
         <file>icons/clock--arrow.png</file>
         <file>icons/clock.png</file>
+        <file>icons/calendar--pencil.png</file>
+        <file>icons/calendar--plus.png</file>
     </qresource>
 </RCC>

@@ -48,9 +48,12 @@ private slots:
 
     void on_treeWidgetCollections_itemDoubleClicked(QTreeWidgetItem *item, int);
 
+    void on_treeWidgetEvents_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;
+    QMenu *m_MenuTreeWidgetEvents;
     QMap<int, int> m_numTasksByProject;
     void fillTreeCollections();
     void addProjectToTree(QTreeWidgetItem *root, Project *row);

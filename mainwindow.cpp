@@ -11,11 +11,13 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    m_MenuTreeWidgetCollections(new QMenu(this))
+    m_MenuTreeWidgetCollections(new QMenu(this)),
+    m_MenuTreeWidgetEvents(new QMenu(this))
 {
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
     tabifyDockWidget(ui->dockWidget, ui->dockWidget_2);
+
     m_MenuTreeWidgetCollections->addAction(ui->actionNewCollection);
     m_MenuTreeWidgetCollections->addAction(ui->actionEdit_Collection);
     m_MenuTreeWidgetCollections->addAction(ui->actionRemove_Collection);
@@ -24,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MenuTreeWidgetCollections->addAction(ui->actionEdit_Project);
     m_MenuTreeWidgetCollections->addAction(ui->actionRemove_Project);
     fillTreeCollections();
+
+    m_MenuTreeWidgetEvents->addAction(ui->actionNew_Event);
 
     connect(this, &MainWindow::collectionUpdated, this, &MainWindow::fillTreeCollections);
     connect(this, &MainWindow::collectionDeleted, this, &MainWindow::fillTreeCollections);
@@ -222,4 +226,9 @@ void MainWindow::on_treeWidgetCollections_itemDoubleClicked(QTreeWidgetItem *ite
         return;
     int id = item->data(0, Qt::UserRole).toInt();
     this->openProject(id);
+}
+
+void MainWindow::on_treeWidgetEvents_customContextMenuRequested(const QPoint &pos)
+{
+    m_MenuTreeWidgetEvents->popup(ui->treeWidgetEvents->mapToGlobal(pos));
 }
