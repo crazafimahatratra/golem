@@ -38,7 +38,8 @@ SOURCES += \
     mdi/mdiproject.cpp \
     dialogs/dialogtask.cpp \
     models/task.cpp \
-    dialogs/dialogevent.cpp
+    dialogs/dialogevent.cpp \
+    models/event.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -56,7 +57,8 @@ HEADERS += \
     dialogs/dialogtask.h \
     models/task.h \
     constants.h \
-    dialogs/dialogevent.h
+    dialogs/dialogevent.h \
+    models/event.h
 
 FORMS += \
         mainwindow.ui \

@@ -16,6 +16,11 @@ public:
     explicit DialogEvent(MainWindow *parent = 0);
     ~DialogEvent();
 
+private slots:
+    void on_pushButtonCancel_clicked();
+
+    void on_pushButtonOK_clicked();
+
 private:
     Ui::DialogEvent *ui;
     MainWindow *m_parent;
