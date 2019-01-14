@@ -49,6 +49,7 @@ void MdiEvents::addProjectsToTree()
         QTreeWidgetItem *item = new QTreeWidgetItem(TREEVIEW_TYPE_PROJECT);
         item->setText(0, projects[i]->name);
         item->setData(0, Qt::UserRole, projects[i]->id);
+        item->setIcon(0, QIcon(":/png/icons/folder.png"));
         ui->treeWidget->addTopLevelItem(item);
         delete projects[i];
     }
