@@ -59,6 +59,10 @@ private slots:
 
     void on_treeWidgetEvents_itemDoubleClicked(QTreeWidgetItem *item, int);
 
+    void on_actionExport_Database_triggered();
+
+    void on_actionImport_Database_triggered();
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;

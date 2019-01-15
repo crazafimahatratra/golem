@@ -30,5 +30,7 @@
         <file>icons/calendar-select.png</file>
         <file>icons/calendar-select-month.png</file>
         <file>icons/calendar--minus.png</file>
+        <file>icons/database-import.png</file>
+        <file>icons/database--arrow.png</file>
     </qresource>
 </RCC>

@@ -11,6 +11,7 @@
 #include <QMdiSubWindow>
 #include <QDebug>
 #include "qtkit/WidgetUtils/treewidget.h"
+#include "qtkit/QSqliteWrapper/backup.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -315,4 +316,14 @@ void MainWindow::on_treeWidgetEvents_itemDoubleClicked(QTreeWidgetItem *item, in
     if(item->type() != TREEVIEW_TYPE_DAY)
         return;
     openEvents(item->data(1, Qt::UserRole).toDate());
+}
+
+void MainWindow::on_actionExport_Database_triggered()
+{
+    QSqliteWrapper::Backup::exportDb(this);
+}
+
+void MainWindow::on_actionImport_Database_triggered()
+{
+
 }

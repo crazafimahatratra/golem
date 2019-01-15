@@ -58,6 +58,9 @@
     <addaction name="actionNewCollection"/>
     <addaction name="actionNewProject"/>
     <addaction name="separator"/>
+    <addaction name="actionExport_Database"/>
+    <addaction name="actionImport_Database"/>
+    <addaction name="separator"/>
     <addaction name="action_Quitter"/>
    </widget>
    <widget class="QMenu" name="menu_Edit">
@@ -273,6 +276,24 @@
    </property>
    <property name="text">
     <string>Remove Project</string>
+   </property>
+  </action>
+  <action name="actionExport_Database">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/png/icons/database--arrow.png</normaloff>:/png/icons/database--arrow.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export Database</string>
+   </property>
+  </action>
+  <action name="actionImport_Database">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/png/icons/database-import.png</normaloff>:/png/icons/database-import.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import Database</string>
    </property>
   </action>
  </widget>

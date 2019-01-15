@@ -42,7 +42,8 @@ SOURCES += \
     models/event.cpp \
     mdi/mdievents.cpp \
     qtkit/WidgetUtils/tablewidget.cpp \
-    qtkit/WidgetUtils/treewidget.cpp
+    qtkit/WidgetUtils/treewidget.cpp \
+    qtkit/QSqliteWrapper/backup.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -64,7 +65,8 @@ HEADERS += \
     models/event.h \
     mdi/mdievents.h \
     qtkit/WidgetUtils/tablewidget.h \
-    qtkit/WidgetUtils/treewidget.h
+    qtkit/WidgetUtils/treewidget.h \
+    qtkit/QSqliteWrapper/backup.h
 
 FORMS += \
         mainwindow.ui \
