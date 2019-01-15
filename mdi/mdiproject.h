@@ -64,7 +64,17 @@ private slots:
 
     void on_eventUpdated(int, int project_id, QDateTime, int old_project_id, QDateTime);
 
-    void on_tableWidget_cellDoubleClicked(int row, int);
+    void on_eventDeleted(int, int project_id, QDateTime);
+
+    void on_tableWidget_cellDoubleClicked(int, int);
+
+    void on_actionNew_Event_triggered();
+
+    void on_tableWidget_itemSelectionChanged();
+
+    void on_actionEdit_Event_triggered();
+
+    void on_actionRemove_Event_triggered();
 
 private:
     Ui::MdiProject *ui;
@@ -72,12 +82,15 @@ private:
     Project *m_project = nullptr;
     Collection *m_collection = nullptr;
     QMenu *m_menuTasks = nullptr;
-    void updateMenu();
+    void updateMenuTasks();
+    void updateMenuEvents();
     void updateProject(int project_id);
     void fillTasks();
     void fillEvents();
     int selectedTaskId();
+    int selectedEventId();
     QString selectedTaskTitle();
+    QString selectedEventTitle();
     int selectedTaskStatus();
 };
 

@@ -33,6 +33,7 @@ MdiProject::MdiProject(int id, MainWindow *parent) :
     connect(m_parent, &MainWindow::taskUpdated, this, &MdiProject::on_taskUpdated);
     connect(m_parent, &MainWindow::taskDeleted, this, &MdiProject::on_taskDeleted);
     connect(m_parent, &MainWindow::eventUpdated, this, &MdiProject::on_eventUpdated);
+    connect(m_parent, &MainWindow::eventDeleted, this, &MdiProject::on_eventDeleted);
 }
 
 MdiProject::~MdiProject()
@@ -90,7 +91,7 @@ void MdiProject::fillTasks()
         delete rows[i];
     }
     delete model;
-    this->updateMenu();
+    this->updateMenuTasks();
     ui->treeWidget->expandAll();
 
     for(int i = 0; i < ui->treeWidget->topLevelItemCount(); i++)
@@ -120,6 +121,7 @@ void MdiProject::fillEvents()
         ui->tableWidget->resizeColumnToContents(i);
     delete model;
     WidgetUtils::TableWidget::setReadonly(ui->tableWidget);
+    updateMenuEvents();
 }
 
 int MdiProject::selectedTaskId()
@@ -131,6 +133,13 @@ int MdiProject::selectedTaskId()
     return ui->treeWidget->currentItem()->data(0, Qt::UserRole).toInt();
 }
 
+int MdiProject::selectedEventId()
+{
+    if(ui->tableWidget->currentRow() < 0)
+        return 0;
+    return ui->tableWidget->item(ui->tableWidget->currentRow(), 0)->data(Qt::UserRole).toInt();
+}
+
 QString MdiProject::selectedTaskTitle()
 {
     if(!ui->treeWidget->currentItem())
@@ -138,6 +147,13 @@ QString MdiProject::selectedTaskTitle()
     if(ui->treeWidget->currentItem()->type() != TREEVIEW_TYPE_TASK)
         return "";
     return ui->treeWidget->currentItem()->text(0);
+}
+
+QString MdiProject::selectedEventTitle()
+{
+    if(ui->tableWidget->currentRow() < 0)
+        return "";
+    return ui->tableWidget->item(ui->tableWidget->currentRow(), 1)->text();
 }
 
 int MdiProject::selectedTaskStatus()
@@ -176,7 +192,7 @@ void MdiProject::on_actionEdit_Task_triggered()
     dialog.exec();
 }
 
-void MdiProject::updateMenu()
+void MdiProject::updateMenuTasks()
 {
     bool taskSelected = selectedTaskId() > 0;
     int status = selectedTaskStatus();
@@ -184,6 +200,15 @@ void MdiProject::updateMenu()
     ui->actionRemove_Task->setEnabled(taskSelected);
     ui->actionMark_As_Done->setEnabled(taskSelected && (status == TASK_STATUS_STARTED));
     ui->actionRestart->setEnabled(taskSelected && (status == TASK_STATUS_FINISHED));
+
+
+}
+
+void MdiProject::updateMenuEvents()
+{
+    bool eventSelected = selectedEventId() > 0;
+    ui->actionEdit_Event->setEnabled(eventSelected);
+    ui->actionRemove_Event->setEnabled(eventSelected);
 }
 
 void MdiProject::updateProject(int project_id)
@@ -217,7 +242,7 @@ void MdiProject::on_treeWidget_customContextMenuRequested(const QPoint &pos)
 
 void MdiProject::on_treeWidget_itemSelectionChanged()
 {
-    this->updateMenu();
+    this->updateMenuTasks();
 }
 
 void MdiProject::on_actionMark_As_Done_triggered()
@@ -306,9 +331,52 @@ void MdiProject::on_eventUpdated(int, int project_id, QDateTime, int old_project
     this->fillEvents();
 }
 
-void MdiProject::on_tableWidget_cellDoubleClicked(int row, int)
+void MdiProject::on_eventDeleted(int, int project_id, QDateTime)
 {
-    int id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toInt();
+    if(project_id != m_project->id)
+        return;
+    this->fillEvents();
+}
+
+void MdiProject::on_tableWidget_cellDoubleClicked(int, int)
+{
+    on_actionEdit_Event_triggered();
+}
+
+void MdiProject::on_actionNew_Event_triggered()
+{
+    DialogEvent dialog(0, m_parent);
+    dialog.exec();
+}
+
+void MdiProject::on_tableWidget_itemSelectionChanged()
+{
+    updateMenuEvents();
+}
+
+void MdiProject::on_actionEdit_Event_triggered()
+{
+    int id = selectedEventId();
+    if(!id)
+        return;
     DialogEvent dialog(id, m_parent);
     dialog.exec();
+}
+
+void MdiProject::on_actionRemove_Event_triggered()
+{
+    int id = selectedEventId();
+    if(!id)
+        return;
+    QString label = selectedEventTitle();
+    int res = QMessageBox::warning(this, "Confirmation", "Delete the event " + label + ".\n\n"
+                                                          "Are you sure ?", QMessageBox::Yes|QMessageBox::No);
+    if(res != QMessageBox::Yes)
+        return;
+    Event *p = Event::findById<Event>(id);
+    if(p) {
+        p->remove();
+        emit m_parent->eventDeleted(p->id, p->project_id, p->evedate);
+        delete p;
+    }
 }
