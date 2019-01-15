@@ -12,7 +12,7 @@
 #include <QDebug>
 #include "qtkit/WidgetUtils/treewidget.h"
 #include "qtkit/QSqliteWrapper/backup.h"
-
+int const MainWindow::EXIT_CODE_REBOOT = -123456789;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -325,5 +325,5 @@ void MainWindow::on_actionExport_Database_triggered()
 
 void MainWindow::on_actionImport_Database_triggered()
 {
-
+    QSqliteWrapper::Backup::importDb(this, EXIT_CODE_REBOOT);
 }

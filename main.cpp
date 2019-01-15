@@ -21,27 +21,31 @@ QByteArray readTextFile(const QString &file_path)
 
 int main(int argc, char *argv[])
 {
-    QApplication::setApplicationName(APP_NAME);
-    QApplication::setApplicationDisplayName(APP_NAME);
-    QApplication::setApplicationVersion(APP_VERSION);
-    QApplication::setOrganizationName(APP_ORGANIZATION_NAME);
-    QApplication::setOrganizationDomain(APP_ORGANIZATION_DOMAIN);
-    QApplication a(argc, argv);
+    int currentExitCode = 0;
+    do {
+        QApplication::setApplicationName(APP_NAME);
+        QApplication::setApplicationDisplayName(APP_NAME);
+        QApplication::setApplicationVersion(APP_VERSION);
+        QApplication::setOrganizationName(APP_ORGANIZATION_NAME);
+        QApplication::setOrganizationDomain(APP_ORGANIZATION_DOMAIN);
+        QApplication a(argc, argv);
 
-    a.setStyleSheet(readTextFile(":/css/styles.css"));
-    QFontDatabase::addApplicationFont(":/fonts/fonts/open-sans-v15-latin-regular.ttf");
-    QFontDatabase::addApplicationFont(":/fonts/fonts/open-sans-v15-latin-700.ttf");
+        a.setStyleSheet(readTextFile(":/css/styles.css"));
+        QFontDatabase::addApplicationFont(":/fonts/fonts/open-sans-v15-latin-regular.ttf");
+        QFontDatabase::addApplicationFont(":/fonts/fonts/open-sans-v15-latin-700.ttf");
 
-    QFontDatabase::addApplicationFont(":/fonts/fonts/oswald-v16-latin-regular.ttf");
-    QFontDatabase::addApplicationFont(":/fonts/fonts/oswald-v16-latin-700.ttf");
+        QFontDatabase::addApplicationFont(":/fonts/fonts/oswald-v16-latin-regular.ttf");
+        QFontDatabase::addApplicationFont(":/fonts/fonts/oswald-v16-latin-700.ttf");
 
-    QSqliteWrapper::DbConnector::useAppData(true);
-    QSqliteWrapper::DbConnector::setDbName("golem.db");
-    Version v;
-    v.upgrade(":/sql/upgrade.sql");
+        QSqliteWrapper::DbConnector::useAppData(true);
+        QSqliteWrapper::DbConnector::setDbName("golem.db");
+        Version v;
+        v.upgrade(":/sql/upgrade.sql");
 
-    MainWindow w;
-    w.show();
+        MainWindow w;
+        w.show();
+        currentExitCode = a.exec();
+    } while (currentExitCode == MainWindow::EXIT_CODE_REBOOT);
 
-    return a.exec();
+    return currentExitCode;
 }
