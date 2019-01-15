@@ -57,8 +57,6 @@ private slots:
 
     void on_treeWidgetEvents_customContextMenuRequested(const QPoint &pos);
 
-    void on_actionNew_Event_triggered();
-
     void on_treeWidgetEvents_itemDoubleClicked(QTreeWidgetItem *item, int);
 
 private:

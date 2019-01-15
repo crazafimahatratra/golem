@@ -31,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MenuTreeWidgetCollections->addAction(ui->actionRemove_Project);
     fillTreeCollections();
 
-    m_MenuTreeWidgetEvents->addAction(ui->actionNew_Event);
     fillTreeEvents();
 
     connect(this, &MainWindow::collectionUpdated, this, &MainWindow::fillTreeCollections);
@@ -309,12 +308,6 @@ void MainWindow::on_treeWidgetCollections_itemDoubleClicked(QTreeWidgetItem *ite
 void MainWindow::on_treeWidgetEvents_customContextMenuRequested(const QPoint &pos)
 {
     m_MenuTreeWidgetEvents->popup(ui->treeWidgetEvents->mapToGlobal(pos));
-}
-
-void MainWindow::on_actionNew_Event_triggered()
-{
-    DialogEvent dialog(0, this);
-    dialog.exec();
 }
 
 void MainWindow::on_treeWidgetEvents_itemDoubleClicked(QTreeWidgetItem *item, int)

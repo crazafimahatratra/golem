@@ -57,7 +57,6 @@
     </property>
     <addaction name="actionNewCollection"/>
     <addaction name="actionNewProject"/>
-    <addaction name="actionNew_Event"/>
     <addaction name="separator"/>
     <addaction name="action_Quitter"/>
    </widget>
@@ -92,7 +91,6 @@
    <addaction name="actionEdit_Project"/>
    <addaction name="actionRemove_Project"/>
    <addaction name="separator"/>
-   <addaction name="actionNew_Event"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
@@ -275,15 +273,6 @@
    </property>
    <property name="text">
     <string>Remove Project</string>
-   </property>
-  </action>
-  <action name="actionNew_Event">
-   <property name="icon">
-    <iconset resource="icons.qrc">
-     <normaloff>:/png/icons/calendar--plus.png</normaloff>:/png/icons/calendar--plus.png</iconset>
-   </property>
-   <property name="text">
-    <string>New Event</string>
    </property>
   </action>
  </widget>
