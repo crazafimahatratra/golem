@@ -15,6 +15,7 @@ class DialogEvent : public QDialog
 
 public:
     explicit DialogEvent(int id, MainWindow *parent = 0);
+    void setSelectedProject(int project_id);
     ~DialogEvent();
 
 private slots:

@@ -346,6 +346,7 @@ void MdiProject::on_tableWidget_cellDoubleClicked(int, int)
 void MdiProject::on_actionNew_Event_triggered()
 {
     DialogEvent dialog(0, m_parent);
+    dialog.setSelectedProject(m_project->id);
     dialog.exec();
 }
 

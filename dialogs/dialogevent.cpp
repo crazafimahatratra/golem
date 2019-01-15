@@ -31,6 +31,18 @@ DialogEvent::DialogEvent(int id, MainWindow *parent) :
     ui->textEditContent->setHtml(m_event->content);
 }
 
+void DialogEvent::setSelectedProject(int project_id)
+{
+    for(int i = 0; i < ui->comboBoxProjects->count(); i++)
+    {
+        if(ui->comboBoxProjects->itemData(i, Qt::UserRole).toInt() == project_id)
+        {
+            ui->comboBoxProjects->setCurrentIndex(i);
+            break;
+        }
+    }
+}
+
 DialogEvent::~DialogEvent()
 {
     delete ui;
