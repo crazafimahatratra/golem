@@ -14,6 +14,7 @@ MdiProject::MdiProject(int id, MainWindow *parent) :
 
     updateProject(id);
     this->fillTasks();
+    this->fillEvents();
 
     m_menuTasks =  new QMenu(this);
     m_menuTasks->addAction(ui->actionEdit_Task);
@@ -96,6 +97,22 @@ void MdiProject::fillTasks()
 
     for(int i = 0; i < ui->treeWidget->columnCount(); i++)
         ui->treeWidget->resizeColumnToContents(i);
+}
+
+void MdiProject::fillEvents()
+{
+    Event *model = new Event();
+    model->where("project_id = ", this->m_project->id)->order("evedate");
+    QList<Event *> rows = model->get<Event>();
+    ui->tableWidget->clearContents();
+    ui->tableWidget->setRowCount(rows.length());
+    for(int i = 0; i < rows.length(); i++)
+    {
+        ui->tableWidget->setItem(i, 0, new QTableWidgetItem(rows[i]->evedate.toString(DATETIME_FORMAT)));
+        ui->tableWidget->setItem(i, 1, new QTableWidgetItem(rows[i]->title));
+        delete rows[i];
+    }
+    delete model;
 }
 
 int MdiProject::selectedTaskId()

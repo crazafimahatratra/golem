@@ -7,6 +7,7 @@
 #include "models/project.h"
 #include "models/collection.h"
 #include "models/task.h"
+#include "models/event.h"
 #include "mainwindow.h"
 
 #define TREEVIEW_TYPE_TASK 1
@@ -70,6 +71,7 @@ private:
     void updateMenu();
     void updateProject(int project_id);
     void fillTasks();
+    void fillEvents();
     int selectedTaskId();
     QString selectedTaskTitle();
     int selectedTaskStatus();

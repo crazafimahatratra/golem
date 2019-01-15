@@ -15,18 +15,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
@@ -72,75 +60,96 @@
      </layout>
     </item>
     <item>
-     <widget class="QTreeWidget" name="treeWidget">
-      <property name="contextMenuPolicy">
-       <enum>Qt::CustomContextMenu</enum>
-      </property>
-      <property name="alternatingRowColors">
-       <bool>true</bool>
-      </property>
-      <column>
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Due Date</string>
-       </property>
-      </column>
+     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1">
       <item>
-       <property name="text">
-        <string>Overdue</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="icon">
-        <iconset resource="../icons.qrc">
-         <normaloff>:/png/icons/calendar--exclamation.png</normaloff>:/png/icons/calendar--exclamation.png</iconset>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
+       <widget class="QTreeWidget" name="treeWidget">
+        <property name="contextMenuPolicy">
+         <enum>Qt::CustomContextMenu</enum>
+        </property>
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Due Date</string>
+         </property>
+        </column>
+        <item>
+         <property name="text">
+          <string>Overdue</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../icons.qrc">
+           <normaloff>:/png/icons/calendar--exclamation.png</normaloff>:/png/icons/calendar--exclamation.png</iconset>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Today</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../icons.qrc">
+           <normaloff>:/png/icons/calendar.png</normaloff>:/png/icons/calendar.png</iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Up Next</string>
+         </property>
+         <property name="font">
+          <font>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="icon">
+          <iconset resource="../icons.qrc">
+           <normaloff>:/png/icons/calendar--arrow.png</normaloff>:/png/icons/calendar--arrow.png</iconset>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
-       <property name="text">
-        <string>Today</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="icon">
-        <iconset resource="../icons.qrc">
-         <normaloff>:/png/icons/calendar.png</normaloff>:/png/icons/calendar.png</iconset>
-       </property>
+       <widget class="QTableWidget" name="tableWidget">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>Date</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Event</string>
+         </property>
+        </column>
+       </widget>
       </item>
-      <item>
-       <property name="text">
-        <string>Up Next</string>
-       </property>
-       <property name="font">
-        <font>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="icon">
-        <iconset resource="../icons.qrc">
-         <normaloff>:/png/icons/calendar--arrow.png</normaloff>:/png/icons/calendar--arrow.png</iconset>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </item>
-     </widget>
+     </layout>
     </item>
    </layout>
   </widget>
