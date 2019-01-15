@@ -1,9 +1,12 @@
 #include "mdiproject.h"
 #include "ui_mdiproject.h"
 #include "dialogs/dialogtask.h"
+#include "dialogs/dialogevent.h"
 #include "constants.h"
 #include <QMessageBox>
 #include <QDebug>
+#include "qtkit/WidgetUtils/tablewidget.h"
+#include "qtkit/WidgetUtils/treewidget.h"
 
 MdiProject::MdiProject(int id, MainWindow *parent) :
     QMainWindow(parent),
@@ -29,6 +32,7 @@ MdiProject::MdiProject(int id, MainWindow *parent) :
     connect(m_parent, &MainWindow::projectDeleted, this, &MdiProject::on_projectDeleted);
     connect(m_parent, &MainWindow::taskUpdated, this, &MdiProject::on_taskUpdated);
     connect(m_parent, &MainWindow::taskDeleted, this, &MdiProject::on_taskDeleted);
+    connect(m_parent, &MainWindow::eventUpdated, this, &MdiProject::on_eventUpdated);
 }
 
 MdiProject::~MdiProject()
@@ -95,8 +99,7 @@ void MdiProject::fillTasks()
         root->setHidden(root->childCount() == 0);
     }
 
-    for(int i = 0; i < ui->treeWidget->columnCount(); i++)
-        ui->treeWidget->resizeColumnToContents(i);
+    WidgetUtils::TreeWidget::resizeColumns(ui->treeWidget);
 }
 
 void MdiProject::fillEvents()
@@ -110,9 +113,13 @@ void MdiProject::fillEvents()
     {
         ui->tableWidget->setItem(i, 0, new QTableWidgetItem(rows[i]->evedate.toString(DATETIME_FORMAT)));
         ui->tableWidget->setItem(i, 1, new QTableWidgetItem(rows[i]->title));
+        ui->tableWidget->item(i, 0)->setData(Qt::UserRole, rows[i]->id);
         delete rows[i];
     }
+    for(int i = 0; i < ui->tableWidget->columnCount() - 1; i++)
+        ui->tableWidget->resizeColumnToContents(i);
     delete model;
+    WidgetUtils::TableWidget::setReadonly(ui->tableWidget);
 }
 
 int MdiProject::selectedTaskId()
@@ -290,4 +297,18 @@ void MdiProject::on_taskDeleted(int, int project_id)
     if(project_id != m_project->id)
         return;
     this->fillTasks();
+}
+
+void MdiProject::on_eventUpdated(int, int project_id, QDateTime, int old_project_id, QDateTime)
+{
+    if((old_project_id != m_project->id) && (project_id != m_project->id))
+        return;
+    this->fillEvents();
+}
+
+void MdiProject::on_tableWidget_cellDoubleClicked(int row, int)
+{
+    int id = ui->tableWidget->item(row, 0)->data(Qt::UserRole).toInt();
+    DialogEvent dialog(id, m_parent);
+    dialog.exec();
 }

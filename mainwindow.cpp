@@ -10,6 +10,7 @@
 #include <QMessageBox>
 #include <QMdiSubWindow>
 #include <QDebug>
+#include "qtkit/WidgetUtils/treewidget.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -84,8 +85,7 @@ void MainWindow::fillTreeCollections()
     }
     ui->treeWidgetCollections->expandAll();
     this->updateMenus();
-    for(int i = 0; i < ui->treeWidgetCollections->columnCount(); i++)
-        ui->treeWidgetCollections->resizeColumnToContents(i);
+    WidgetUtils::TreeWidget::resizeColumns(ui->treeWidgetCollections);
 }
 
 void MainWindow::fillTreeEvents()
@@ -98,8 +98,7 @@ void MainWindow::fillTreeEvents()
         this->addEventToTree(root, dates[i]);
     }
     ui->treeWidgetEvents->expandAll();
-    for(int i = 0; i < ui->treeWidgetEvents->columnCount(); i++)
-        ui->treeWidgetEvents->resizeColumnToContents(i);
+    WidgetUtils::TreeWidget::resizeColumns(ui->treeWidgetEvents);
 }
 
 void MainWindow::addProjectToTree(QTreeWidgetItem *root, Project *row)

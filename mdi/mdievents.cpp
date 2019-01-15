@@ -3,6 +3,7 @@
 #include "dialogs/dialogevent.h"
 #include <QDebug>
 #include <QMessageBox>
+#include "qtkit/WidgetUtils/treewidget.h"
 
 MdiEvents::MdiEvents(QDate date, MainWindow *parent) :
     QMainWindow(parent),
@@ -63,8 +64,7 @@ void MdiEvents::cleanEmptyProjects()
         root->setHidden(root->childCount() == 0);
     }
     ui->treeWidget->expandAll();
-    for(int i = 0; i < ui->treeWidget->columnCount(); i++)
-        ui->treeWidget->resizeColumnToContents(i);
+    WidgetUtils::TreeWidget::resizeColumns(ui->treeWidget);
 }
 
 void MdiEvents::fillEvents()

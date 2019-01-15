@@ -40,7 +40,9 @@ SOURCES += \
     models/task.cpp \
     dialogs/dialogevent.cpp \
     models/event.cpp \
-    mdi/mdievents.cpp
+    mdi/mdievents.cpp \
+    qtkit/WidgetUtils/tablewidget.cpp \
+    qtkit/WidgetUtils/treewidget.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -60,7 +62,9 @@ HEADERS += \
     constants.h \
     dialogs/dialogevent.h \
     models/event.h \
-    mdi/mdievents.h
+    mdi/mdievents.h \
+    qtkit/WidgetUtils/tablewidget.h \
+    qtkit/WidgetUtils/treewidget.h
 
 FORMS += \
         mainwindow.ui \

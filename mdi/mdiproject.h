@@ -62,6 +62,10 @@ private slots:
 
     void on_taskDeleted(int, int project_id);
 
+    void on_eventUpdated(int, int project_id, QDateTime, int old_project_id, QDateTime);
+
+    void on_tableWidget_cellDoubleClicked(int row, int);
+
 private:
     Ui::MdiProject *ui;
     MainWindow *m_parent;

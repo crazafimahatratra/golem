@@ -43,10 +43,10 @@ void DialogEvent::on_pushButtonCancel_clicked()
 
 void DialogEvent::on_pushButtonOK_clicked()
 {
+    int old_project_id = m_event->project_id;
+    QDateTime old_date = m_event->evedate;
     m_event->project_id = ui->comboBoxProjects->currentData(Qt::UserRole).toInt();
     m_event->title = ui->lineEditTitle->text();
-    QDateTime old_date = m_event->evedate;
-    int old_project_id = m_event->project_id;
     m_event->evedate = ui->dateTimeEdit->dateTime();
     m_event->content = ui->textEditContent->toHtml();
     if(m_event->id)
