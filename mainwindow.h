@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    static int const EXIT_CODE_REBOOT;
+    static int const EXIT_CODE_REBOOT; // use for restarting app, when importing data
 signals:
     void projectUpdated(int project_id);
     void projectDeleted(int project_id);
