@@ -76,6 +76,8 @@ private slots:
 
     void on_actionRemove_Event_triggered();
 
+    void on_tableWidget_customContextMenuRequested(const QPoint &pos);
+
 private:
     Ui::MdiProject *ui;
     MainWindow *m_parent;

@@ -387,3 +387,8 @@ void MdiProject::on_actionRemove_Event_triggered()
         delete p;
     }
 }
+
+void MdiProject::on_tableWidget_customContextMenuRequested(const QPoint &pos)
+{
+    m_menuEvents->popup(ui->tableWidget->mapToGlobal(pos));
+}
