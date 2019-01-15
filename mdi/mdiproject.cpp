@@ -105,7 +105,7 @@ void MdiProject::fillTasks()
 void MdiProject::fillEvents()
 {
     Event *model = new Event();
-    model->where("project_id = ", this->m_project->id)->order("evedate");
+    model->where("project_id = ", this->m_project->id)->order("evedate DESC");
     QList<Event *> rows = model->get<Event>();
     ui->tableWidget->clearContents();
     ui->tableWidget->setRowCount(rows.length());
