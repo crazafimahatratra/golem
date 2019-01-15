@@ -20,11 +20,17 @@ MdiProject::MdiProject(int id, MainWindow *parent) :
     this->fillEvents();
 
     m_menuTasks =  new QMenu(this);
+    m_menuTasks->addAction(ui->actionNewTask);
     m_menuTasks->addAction(ui->actionEdit_Task);
     m_menuTasks->addAction(ui->actionRemove_Task);
     m_menuTasks->addSeparator();
     m_menuTasks->addAction(ui->actionMark_As_Done);
     m_menuTasks->addAction(ui->actionRestart);
+
+    m_menuEvents = new QMenu(this);
+    m_menuEvents->addAction(ui->actionNew_Event);
+    m_menuEvents->addAction(ui->actionEdit_Event);
+    m_menuEvents->addAction(ui->actionRemove_Event);
 
     connect(m_parent, &MainWindow::collectionUpdated, this, &MdiProject::on_collectionUpdated);
     connect(m_parent, &MainWindow::collectionDeleted, this, &MdiProject::on_collectionDeleted);

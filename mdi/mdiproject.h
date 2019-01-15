@@ -82,6 +82,7 @@ private:
     Project *m_project = nullptr;
     Collection *m_collection = nullptr;
     QMenu *m_menuTasks = nullptr;
+    QMenu *m_menuEvents = nullptr;
     void updateMenuTasks();
     void updateMenuEvents();
     void updateProject(int project_id);
