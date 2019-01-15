@@ -9,7 +9,6 @@ DialogProject::DialogProject(int collection_id, int project_id, MainWindow *pare
     m_parent(parent)
 {
     ui->setupUi(this);
-    QList<Collection *> rows = Collection::getAll<Collection>();
     if(project_id)
     {
         m_project = Project::findById<Project>(project_id);
@@ -25,6 +24,10 @@ DialogProject::DialogProject(int collection_id, int project_id, MainWindow *pare
         m_project->id = 0;
     }
 
+    Collection *model = new Collection();
+    model->order("name");
+    QList<Collection *> rows = model->get<Collection>();
+    delete model;
     for(int i = 0; i < rows.length(); i++)
     {
         ui->comboBoxCollections->addItem(rows[i]->name, rows[i]->id);

@@ -21,7 +21,9 @@ DialogTask::DialogTask(int project_id, int task_id, MainWindow *parent) :
         project_id = m_task->project_id;
     }
 
-    QList<Project *> rows = Project::getAll<Project>();
+    Project *model = new Project();
+    QList<Project *> rows = model->order("name")->get<Project>();
+    delete model;
     for(int i = 0; i < rows.length(); i++)
     {
         ui->comboBoxProject->addItem(rows[i]->name, rows[i]->id);

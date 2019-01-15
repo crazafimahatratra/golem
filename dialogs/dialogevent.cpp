@@ -17,7 +17,9 @@ DialogEvent::DialogEvent(int id, MainWindow *parent) :
         m_event->evedate = QDateTime::currentDateTime();
     }
 
-    QList<Project *> rows = Project::getAll<Project>();
+    Project *model = new Project();
+    QList<Project *> rows = model->order("name")->get<Project>();
+    delete model;
     for(int i = 0; i < rows.length(); i++)
     {
         ui->comboBoxProjects->addItem(rows[i]->name, rows[i]->id);
