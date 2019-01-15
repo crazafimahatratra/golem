@@ -32,5 +32,7 @@
         <file>icons/calendar--minus.png</file>
         <file>icons/database-import.png</file>
         <file>icons/database--arrow.png</file>
+        <file>icons/golem.png</file>
+        <file>icons/golem-256.png</file>
     </qresource>
 </RCC>

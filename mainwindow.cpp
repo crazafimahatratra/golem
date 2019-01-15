@@ -3,6 +3,7 @@
 #include "dialogs/dialogcollection.h"
 #include "dialogs/dialogproject.h"
 #include "dialogs/dialogevent.h"
+#include "dialogs/dialogabout.h"
 #include "mdi/mdiproject.h"
 #include "mdi/mdievents.h"
 #include "models/collection.h"
@@ -326,4 +327,10 @@ void MainWindow::on_actionExport_Database_triggered()
 void MainWindow::on_actionImport_Database_triggered()
 {
     QSqliteWrapper::Backup::importDb(this, EXIT_CODE_REBOOT);
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    DialogAbout dialog(this);
+    dialog.exec();
 }

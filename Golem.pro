@@ -43,7 +43,8 @@ SOURCES += \
     mdi/mdievents.cpp \
     qtkit/WidgetUtils/tablewidget.cpp \
     qtkit/WidgetUtils/treewidget.cpp \
-    qtkit/QSqliteWrapper/backup.cpp
+    qtkit/QSqliteWrapper/backup.cpp \
+    dialogs/dialogabout.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -66,7 +67,8 @@ HEADERS += \
     mdi/mdievents.h \
     qtkit/WidgetUtils/tablewidget.h \
     qtkit/WidgetUtils/treewidget.h \
-    qtkit/QSqliteWrapper/backup.h
+    qtkit/QSqliteWrapper/backup.h \
+    dialogs/dialogabout.h
 
 FORMS += \
         mainwindow.ui \
@@ -75,7 +77,8 @@ FORMS += \
     mdi/mdiproject.ui \
     dialogs/dialogtask.ui \
     dialogs/dialogevent.ui \
-    mdi/mdievents.ui
+    mdi/mdievents.ui \
+    dialogs/dialogabout.ui
 
 RC_FILE = resources.rc
 

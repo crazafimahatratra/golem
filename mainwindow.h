@@ -64,6 +64,8 @@ private slots:
 
     void on_actionImport_Database_triggered();
 
+    void on_actionAbout_triggered();
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;

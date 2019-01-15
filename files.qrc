@@ -11,4 +11,7 @@
         <file>fonts/open-sans-v15-latin-700.ttf</file>
         <file>fonts/open-sans-v15-latin-regular.ttf</file>
     </qresource>
+    <qresource prefix="/others">
+        <file>license_qt.txt</file>
+    </qresource>
 </RCC>
