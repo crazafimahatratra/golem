@@ -87,6 +87,7 @@ void MainWindow::fillTreeCollections()
     ui->treeWidgetCollections->expandAll();
     this->updateMenus();
     WidgetUtils::TreeWidget::resizeColumns(ui->treeWidgetCollections);
+    WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetCollections, ui->lineEditCollections->text());
 }
 
 void MainWindow::fillTreeEvents()
@@ -100,6 +101,7 @@ void MainWindow::fillTreeEvents()
     }
     ui->treeWidgetEvents->expandAll();
     WidgetUtils::TreeWidget::resizeColumns(ui->treeWidgetEvents);
+    WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetEvents, ui->lineEditFilterEvents->text());
 }
 
 void MainWindow::addProjectToTree(QTreeWidgetItem *root, Project *row)
@@ -333,4 +335,14 @@ void MainWindow::on_actionAbout_triggered()
 {
     DialogAbout dialog(this);
     dialog.exec();
+}
+
+void MainWindow::on_lineEditFilterEvents_textChanged(const QString &arg1)
+{
+    WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetEvents, arg1);
+}
+
+void MainWindow::on_lineEditCollections_textChanged(const QString &arg1)
+{
+    WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetCollections, arg1);
 }

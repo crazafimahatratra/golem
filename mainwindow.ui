@@ -128,7 +128,11 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="lineEditFilterEvents">
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QTreeWidget" name="treeWidgetEvents">
@@ -178,7 +182,11 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="lineEditCollections">
+       <property name="clearButtonEnabled">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QTreeWidget" name="treeWidgetCollections">
