@@ -13,26 +13,89 @@
 #define TREEVIEW_TYPE_DAY 5
 #define TREEVIEW_TYPE_EVENT 6
 
+/**
+ * @namespace Ui Contains all User interfaces classes
+ */
 namespace Ui {
 class MainWindow;
 }
 
+/**
+ * @brief This is the main window
+ */
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param parent widget
+     */
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    static int const EXIT_CODE_REBOOT; // use for restarting app, when importing data
+
+    /**
+     * @brief the code to return when restarting application
+     * @see QSqliteWrapper::Backup::importDb()
+     */
+    static int const EXIT_CODE_REBOOT;
 signals:
+    /**
+     * @brief called when a project has been updated or created
+     * @param project_id : id of the project
+     */
     void projectUpdated(int project_id);
+
+    /**
+     * @brief when a project has been deleted
+     * @param project_id : id of the project
+     */
     void projectDeleted(int project_id);
+
+    /**
+     * @brief when a collection has been updated or inserted
+     * @param collection_id : id of the collection
+     */
     void collectionUpdated(int collection_id);
+
+    /**
+     * @brief when a collection has been deleted
+     * @param collection_id : id of the collection
+     */
     void collectionDeleted(int collection_id);
+
+    /**
+     * @brief when a task has been updated or deleted
+     * @param task_id : id of the task
+     * @param project_id : id of the project
+     * @param old_project_id : id of the previous project (if changed)
+     */
     void taskUpdated(int task_id, int project_id, int old_project_id);
+
+    /**
+     * @brief when a task has been deleted
+     * @param task_id : id of the task
+     * @param project_id : id of the project
+     */
     void taskDeleted(int task_id, int project_id);
+
+    /**
+     * @brief when an event have been updated or created
+     * @param event_id : id of the event
+     * @param project_id : id of the project
+     * @param date : event date
+     * @param old_project_id : id of the previous project (if changed)
+     * @param old_date : this holds the previous date if it was changed
+     */
     void eventUpdated(int event_id, int project_id, QDateTime date, int old_project_id, QDateTime old_date);
+
+    /**
+     * @brief when an event has been deleted
+     * @param event_id : id of the event
+     * @param project_id : id of the project
+     * @param date : event date
+     */
     void eventDeleted(int event_id, int project_id, QDateTime date);
 
 private slots:

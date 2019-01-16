@@ -7,11 +7,18 @@ namespace Ui {
 class DialogAbout;
 }
 
+/**
+ * @brief This is about the **about dialog**
+ */
 class DialogAbout : public QDialog
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param parent widget
+     */
     explicit DialogAbout(QWidget *parent = 0);
     ~DialogAbout();
 

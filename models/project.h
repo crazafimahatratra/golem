@@ -2,6 +2,9 @@
 #define PROJECT_H
 #include "qtkit/QSqliteWrapper/table.h"
 
+/**
+ * @brief Represents a project from the table project in database
+ */
 class Project : public QSqliteWrapper::Table
 {
 public:
@@ -28,9 +31,25 @@ public:
         return parameters;
     }
 
+    /**
+     * @brief id of the project
+     */
     int id;
+
+    /**
+     * @brief id of the collection containing the project
+     * @see Collection::id
+     */
     int collection_id;
+
+    /**
+     * @brief name of the project
+     */
     QString name;
+
+    /**
+     * @brief color of the project icon
+     */
     QString color;
 };
 

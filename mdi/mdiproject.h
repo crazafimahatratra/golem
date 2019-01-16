@@ -16,20 +16,33 @@ namespace Ui {
 class MdiProject;
 }
 
+/**
+ * @brief The window containing project details.
+ * Tasks and Events
+ */
 class MdiProject : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param id of the project to be shown
+     * @param parent widget
+     */
     explicit MdiProject(int id, MainWindow *parent = 0);
     ~MdiProject();
+
+    /**
+     * @brief returns the id of the project currently shown
+     * @return the id of the project
+     * @see Project::id
+     */
     int projectId() {
         if(m_project)
             return m_project->id;
         return 0;
     }
-signals:
-    void requestClose();
 
 private slots:
     void on_actionNewTask_triggered();

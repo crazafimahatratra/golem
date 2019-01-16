@@ -2,6 +2,9 @@
 #define COLLECTION_H
 #include "qtkit/QSqliteWrapper/table.h"
 
+/**
+ * @brief Represents a collection in database
+ */
 class Collection: public QSqliteWrapper::Table
 {
 public:
@@ -34,7 +37,14 @@ public:
         return params;
     }
 
+    /**
+     * @brief id of the collection
+     */
     int id;
+
+    /**
+     * @brief name of the collection
+     */
     QString name;
 };
 

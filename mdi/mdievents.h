@@ -13,13 +13,26 @@ namespace Ui {
 class MdiEvents;
 }
 
+/**
+ * @brief The window containing events of one day
+ */
 class MdiEvents : public QMainWindow
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param date to be shown
+     * @param parent widget
+     */
     explicit MdiEvents(QDate date, MainWindow *parent = 0);
     ~MdiEvents();
+
+    /**
+     * @brief gives the date currently shown
+     * @return the date currently shown
+     */
     QDate date();
 
 private slots:

@@ -3,6 +3,9 @@
 #include "qtkit/QSqliteWrapper/table.h"
 #include <QDateTime>
 
+/**
+ * @brief Represents the **event** table in database
+ */
 class Event: public QSqliteWrapper::Table
 {
 public:
@@ -40,12 +43,36 @@ public:
         return parameters;
     }
 
+    /**
+     * @brief event id
+     */
     int id;
+
+    /**
+     * @brief id of the project containing the event
+     * @see Project::id
+     */
     int project_id;
+
+    /**
+     * @brief title of the event
+     */
     QString title;
+
+    /**
+     * @brief event date
+     */
     QDateTime evedate;
+
+    /**
+     * @brief event content (description or comments)
+     */
     QString content;
 
+    /**
+     * @brief get all dates containing one or more events
+     * @return
+     */
     static QList<QDate> allDateEvents();
 };
 

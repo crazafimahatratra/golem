@@ -9,11 +9,19 @@ namespace Ui {
 class DialogCollection;
 }
 
+/**
+ * @brief Dialog for editing or creating a collection
+ */
 class DialogCollection : public QDialog
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param collection_id : id of the collection (in a case of edit)
+     * @param parent : the widget parent
+     */
     explicit DialogCollection(int collection_id, MainWindow *parent = 0);
     ~DialogCollection();
 
