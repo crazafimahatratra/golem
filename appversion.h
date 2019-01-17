@@ -1,8 +1,8 @@
 #ifndef APPVERSION_H
 #define APPVERSION_H
 
-#define APP_VERSION "1.0.0.0"
-#define APP_FILEVERSION 1,0,0,0
+#define APP_VERSION "1.0.0.1"
+#define APP_FILEVERSION 1,0,0,1
 #define APP_NAME "Golem"
 #define APP_ORGANIZATION_NAME "Chraz"
 #define APP_ORGANIZATION_DOMAIN "https://github.com/crazafimahatratra"

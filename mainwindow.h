@@ -5,7 +5,9 @@
 #include <QTreeWidgetItem>
 #include <QMap>
 #include <QDateTime>
+#include <QLabel>
 #include "models/project.h"
+#include "updatemanager.h"
 #define TREEVIEW_TYPE_COLLECTION 1
 #define TREEVIEW_TYPE_PROJECT 2
 #define TREEVIEW_TYPE_YEAR 3
@@ -133,11 +135,17 @@ private slots:
 
     void on_lineEditCollections_textChanged(const QString &arg1);
 
+    void on_versionFetched(bool newer, QString version);
+
+    void on_versionFetchError(QString);
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;
     QMenu *m_MenuTreeWidgetEvents;
     QMap<int, int> m_numTasksByProject;
+    UpdateManager *m_updatemanager;
+    QLabel *m_labelnotification;
     void fillTreeCollections();
     void fillTreeEvents();
     void addProjectToTree(QTreeWidgetItem *root, Project *row);

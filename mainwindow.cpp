@@ -13,12 +13,17 @@
 #include <QDebug>
 #include "qtkit/WidgetUtils/treewidget.h"
 #include "qtkit/QSqliteWrapper/backup.h"
+#include "appversion.h"
+#include "updatemanager.h"
+
 int const MainWindow::EXIT_CODE_REBOOT = -123456789;
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_MenuTreeWidgetCollections(new QMenu(this)),
-    m_MenuTreeWidgetEvents(new QMenu(this))
+    m_MenuTreeWidgetEvents(new QMenu(this)),
+    m_updatemanager(new UpdateManager(this)),
+    m_labelnotification(new QLabel(this))
 {
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
@@ -43,10 +48,20 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, &MainWindow::taskDeleted, this, &MainWindow::fillTreeCollections);
     connect(this, &MainWindow::eventUpdated, this, &MainWindow::fillTreeEvents);
     connect(this, &MainWindow::eventDeleted, this, &MainWindow::fillTreeEvents);
+
+    m_updatemanager->check(APP_VERSION, "https://chraz-golem.sourceforge.io/current_version.json");
+    connect(m_updatemanager, SIGNAL(versionFetched(bool,QString)), this, SLOT(on_versionFetched(bool,QString)));
+    connect(m_updatemanager, SIGNAL(versionFetchError(QString)), this, SLOT(on_versionFetched(bool,QString)));
+    ui->statusBar->addPermanentWidget(m_labelnotification);
+    m_labelnotification->setText("Checking for new version ...");
 }
 
 MainWindow::~MainWindow()
 {
+    delete m_MenuTreeWidgetCollections;
+    delete m_MenuTreeWidgetEvents;
+    delete m_updatemanager;
+    delete m_labelnotification;
     delete ui;
 }
 
@@ -345,4 +360,20 @@ void MainWindow::on_lineEditFilterEvents_textChanged(const QString &arg1)
 void MainWindow::on_lineEditCollections_textChanged(const QString &arg1)
 {
     WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetCollections, arg1);
+}
+
+void MainWindow::on_versionFetched(bool newer, QString version)
+{
+    if(newer) {
+        m_labelnotification->setOpenExternalLinks(true);
+        m_labelnotification->setText("A new version is available : <strong>" + version + "</strong>"
+            ". Click <a href='https://chraz-golem.sourceforge.io/'>here</a> to download it");
+    } else {
+        m_labelnotification->setText("Your application is up to date");
+    }
+}
+
+void MainWindow::on_versionFetchError(QString)
+{
+    m_labelnotification->setText("");
 }

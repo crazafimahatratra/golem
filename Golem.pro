@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
+QT       += core gui sql network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -44,7 +44,8 @@ SOURCES += \
     qtkit/WidgetUtils/tablewidget.cpp \
     qtkit/WidgetUtils/treewidget.cpp \
     qtkit/QSqliteWrapper/backup.cpp \
-    dialogs/dialogabout.cpp
+    dialogs/dialogabout.cpp \
+    updatemanager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -68,7 +69,8 @@ HEADERS += \
     qtkit/WidgetUtils/tablewidget.h \
     qtkit/WidgetUtils/treewidget.h \
     qtkit/QSqliteWrapper/backup.h \
-    dialogs/dialogabout.h
+    dialogs/dialogabout.h \
+    updatemanager.h
 
 FORMS += \
         mainwindow.ui \

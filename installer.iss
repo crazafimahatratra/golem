@@ -5,7 +5,7 @@
 #define MyAppPublisher "Chraz"
 #define MyAppURL "https://github.com/crazafimahatratra"
 #define MyAppExeName "Golem.exe"
-#define MyAppVersion "1.0.0.0"
+#define MyAppVersion "1.0.0.1"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -57,6 +57,8 @@ Source: "C:\Qt\Qt5.11.1\5.11.1\mingw53_32\bin\Qt5PrintSupport.dll"; DestDir: "{a
 Source: "C:\Qt\Qt5.11.1\5.11.1\mingw53_32\bin\Qt5Sql.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Qt\Qt5.11.1\5.11.1\mingw53_32\bin\Qt5Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Qt\Qt5.11.1\5.11.1\mingw53_32\bin\Qt5SerialPort.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Qt\Qt5.11.1\Tools\mingw530_32\opt\bin\libeay32.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Qt\Qt5.11.1\Tools\mingw530_32\opt\bin\ssleay32.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
