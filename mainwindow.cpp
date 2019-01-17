@@ -51,7 +51,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_updatemanager->check(APP_VERSION, "https://chraz-golem.sourceforge.io/current_version.json");
     connect(m_updatemanager, SIGNAL(versionFetched(bool,QString)), this, SLOT(on_versionFetched(bool,QString)));
-    connect(m_updatemanager, SIGNAL(versionFetchError(QString)), this, SLOT(on_versionFetched(bool,QString)));
+    connect(m_updatemanager, SIGNAL(versionFetchError(QString)), this, SLOT(on_versionFetchError(QString)));
+
     ui->statusBar->addPermanentWidget(m_labelnotification);
     m_labelnotification->setText("Checking for new version ...");
 }
@@ -373,7 +374,8 @@ void MainWindow::on_versionFetched(bool newer, QString version)
     }
 }
 
-void MainWindow::on_versionFetchError(QString)
+void MainWindow::on_versionFetchError(QString error)
 {
     m_labelnotification->setText("");
+    ui->statusBar->showMessage(error, 3000);
 }

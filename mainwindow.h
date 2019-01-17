@@ -137,7 +137,7 @@ private slots:
 
     void on_versionFetched(bool newer, QString version);
 
-    void on_versionFetchError(QString);
+    void on_versionFetchError(QString error);
 
 private:
     Ui::MainWindow *ui;
