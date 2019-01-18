@@ -45,7 +45,8 @@ SOURCES += \
     qtkit/WidgetUtils/treewidget.cpp \
     qtkit/QSqliteWrapper/backup.cpp \
     dialogs/dialogabout.cpp \
-    updatemanager.cpp
+    updatemanager.cpp \
+    notifierthread.cpp \
 
 HEADERS += \
         mainwindow.h \
@@ -70,7 +71,8 @@ HEADERS += \
     qtkit/WidgetUtils/treewidget.h \
     qtkit/QSqliteWrapper/backup.h \
     dialogs/dialogabout.h \
-    updatemanager.h
+    updatemanager.h \
+    notifierthread.h
 
 FORMS += \
         mainwindow.ui \
@@ -80,7 +82,7 @@ FORMS += \
     dialogs/dialogtask.ui \
     dialogs/dialogevent.ui \
     mdi/mdievents.ui \
-    dialogs/dialogabout.ui
+    dialogs/dialogabout.ui \
 
 RC_FILE = resources.rc
 

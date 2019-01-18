@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MenuTreeWidgetCollections(new QMenu(this)),
     m_MenuTreeWidgetEvents(new QMenu(this)),
     m_updatemanager(new UpdateManager(this)),
+    m_notifier(new NotifierThread(this)),
     m_labelnotification(new QLabel(this))
 {
     ui->setupUi(this);
@@ -55,6 +56,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->statusBar->addPermanentWidget(m_labelnotification);
     m_labelnotification->setText("Checking for new version ...");
+
+    connect(m_notifier, SIGNAL(taskDueDateReached(Task*)), this, SLOT(on_taskDueDateReached(Task*)));
+    connect(m_notifier, SIGNAL(finished()), m_notifier, SLOT(deleteLater()));
+    m_notifier->start();
 }
 
 MainWindow::~MainWindow()
@@ -378,4 +383,9 @@ void MainWindow::on_versionFetchError(QString error)
 {
     m_labelnotification->setText("");
     ui->statusBar->showMessage(error, 3000);
+}
+
+void MainWindow::on_taskDueDateReached(Task *task)
+{
+    qDebug() << task;
 }

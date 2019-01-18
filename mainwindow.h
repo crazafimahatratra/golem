@@ -7,7 +7,10 @@
 #include <QDateTime>
 #include <QLabel>
 #include "models/project.h"
+#include "models/task.h"
 #include "updatemanager.h"
+#include "notifierthread.h"
+
 #define TREEVIEW_TYPE_COLLECTION 1
 #define TREEVIEW_TYPE_PROJECT 2
 #define TREEVIEW_TYPE_YEAR 3
@@ -139,12 +142,15 @@ private slots:
 
     void on_versionFetchError(QString error);
 
+    void on_taskDueDateReached(Task *task);
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;
     QMenu *m_MenuTreeWidgetEvents;
     QMap<int, int> m_numTasksByProject;
     UpdateManager *m_updatemanager;
+    NotifierThread *m_notifier;
     QLabel *m_labelnotification;
     void fillTreeCollections();
     void fillTreeEvents();
