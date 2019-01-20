@@ -5,7 +5,7 @@
 #define MyAppPublisher "Chraz"
 #define MyAppURL "https://github.com/crazafimahatratra"
 #define MyAppExeName "Golem.exe"
-#define MyAppVersion "1.0.0.1"
+#define MyAppVersion "1.0.0.2"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
