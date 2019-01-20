@@ -15,6 +15,7 @@ DialogTasksNotification::DialogTasksNotification(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlag(Qt::FramelessWindowHint, true);
+    this->setWindowFlag(Qt::WindowStaysOnTopHint, true);
     connect(Bus::instance(), SIGNAL(taskDeleted(int,int)), this, SLOT(on_taskDeleted(int,int)));
     connect(Bus::instance(), SIGNAL(taskUpdated(int,int,int)), this, SLOT(on_taskUpdated(int,int,int)));
 }
@@ -88,6 +89,8 @@ void DialogTasksNotification::on_taskDetailsRequested(int task_id)
     {
         MainWindow *m = (MainWindow *)this->parent();
         m->openProject(t->project_id);
+        if(m->isMinimized())
+            m->showNormal();
         delete t;
     }
 }

@@ -4,9 +4,11 @@
 #include <QJsonObject>
 #include <QVersionNumber>
 
-UpdateManager::UpdateManager(QObject *parent) :
+UpdateManager::UpdateManager(QString version, QString url, QObject *parent) :
     QObject(parent),
-    m_manager(new QNetworkAccessManager(parent))
+    m_manager(new QNetworkAccessManager(parent)),
+    m_localversion(version),
+    m_url(url)
 {
     connect(m_manager, SIGNAL(finished(QNetworkReply*)), this, SLOT(onFinished(QNetworkReply*)));
 }
@@ -17,11 +19,10 @@ UpdateManager::~UpdateManager()
     delete m_manager;
 }
 
-void UpdateManager::check(QString local_version, QString url)
+void UpdateManager::start()
 {
-    qDebug() << "Open " << url;
-    m_localversion = local_version;
-    m_manager->get(QNetworkRequest(QUrl(url)));
+    qDebug() << "Open " << m_url;
+    m_manager->get(QNetworkRequest(QUrl(m_url)));
 }
 
 void UpdateManager::onFinished(QNetworkReply *reply)

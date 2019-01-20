@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_MenuTreeWidgetCollections(new QMenu(this)),
     m_MenuTreeWidgetEvents(new QMenu(this)),
-    m_updatemanager(new UpdateManager(this)),
+    m_updatemanager(new UpdateManager(APP_VERSION, "https://chraz-golem.sourceforge.io/current_version.json", this)),
     m_notifier(new NotifierThread(this)),
     m_labelnotification(new QLabel(this)),
     m_dialognotification(new DialogTasksNotification(this))
@@ -52,9 +52,9 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(Bus::instance(), &Bus::eventUpdated, this, &MainWindow::fillTreeEvents);
     connect(Bus::instance(), &Bus::eventDeleted, this, &MainWindow::fillTreeEvents);
 
-    m_updatemanager->check(APP_VERSION, "https://chraz-golem.sourceforge.io/current_version.json");
     connect(m_updatemanager, SIGNAL(versionFetched(bool,QString)), this, SLOT(on_versionFetched(bool,QString)));
     connect(m_updatemanager, SIGNAL(versionFetchError(QString)), this, SLOT(on_versionFetchError(QString)));
+    m_updatemanager->start();
 
     ui->statusBar->addPermanentWidget(m_labelnotification);
     m_labelnotification->setText("Checking for new version ...");
@@ -395,5 +395,6 @@ void MainWindow::on_versionFetchError(QString error)
 
 void MainWindow::on_taskDueDateReached(Task *task)
 {
+    this->show();
     m_dialognotification->showTask(task);
 }

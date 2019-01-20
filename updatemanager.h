@@ -5,6 +5,7 @@
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QSslError>
+#include <QThread>
 
 /**
  * @brief Checks for update online and then raises a signal if there is any.
@@ -15,24 +16,27 @@ class UpdateManager : public QObject
 public:
     /**
      * @brief Constructor
+     * @param version : current version of the local application
+     * @param url : Url of the online ressource
      * @param parent : parent widget
+     *
+     * The online ressource should be of the below format :
+     * @code
+     *
+     {
+        "release_date": "2019-01-17 14:52:38",
+        "version": "1.0.0.1"
+     }
+     * @endcode
      */
-    explicit UpdateManager(QObject *parent = nullptr);
+    explicit UpdateManager(QString version, QString url, QObject *parent = nullptr);
     ~UpdateManager();
 
     /**
-     * @brief Checks for the latest version online and raises the signal versionFetched() if any
-     * @param local_version : the version of the running program
-     * @param url : url of the online ressource
-     * The online ressource should returns a json of the following format :
-     * \code
-     {
-    "release_date": "2019-01-17 14:52:38",
-    "version": "1.0.0.1"
-     }
-     * \endcode
+     * @brief Starts fetching the current version.
+     * It is called so to be conform with QThread::start()
      */
-    void check(QString local_version, QString url);
+    void start();
 
 signals:
     /**
@@ -57,6 +61,7 @@ public slots:
 private:
     QNetworkAccessManager *m_manager;
     QString m_localversion;
+    QString m_url;
 };
 
 #endif // UPDATEMANAGER_H
