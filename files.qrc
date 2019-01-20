@@ -13,5 +13,6 @@
     </qresource>
     <qresource prefix="/others">
         <file>license_qt.txt</file>
+        <file>ding.wav</file>
     </qresource>
 </RCC>

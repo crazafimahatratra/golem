@@ -6,10 +6,12 @@
 #include <QMap>
 #include <QDateTime>
 #include <QLabel>
+#include <QMoveEvent>
 #include "models/project.h"
 #include "models/task.h"
 #include "updatemanager.h"
 #include "notifierthread.h"
+#include "dialogs/dialogtasksnotification.h"
 
 #define TREEVIEW_TYPE_COLLECTION 1
 #define TREEVIEW_TYPE_PROJECT 2
@@ -39,6 +41,8 @@ public:
      */
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+    void openProject(int project_id);
 
     /**
      * @brief the code to return when restarting application
@@ -152,15 +156,18 @@ private:
     UpdateManager *m_updatemanager;
     NotifierThread *m_notifier;
     QLabel *m_labelnotification;
+    DialogTasksNotification *m_dialognotification;
+
     void fillTreeCollections();
     void fillTreeEvents();
     void addProjectToTree(QTreeWidgetItem *root, Project *row);
     void addEventToTree(QTreeWidgetItem *root, QDate date);
     void updateMenus();
     void updateMdiTabbar();
-    void openProject(int project_id);
     void openEvents(QDate date);
     QTreeWidgetItem *treeWidgetItemFromValue(QTreeWidgetItem *root, int value);
+
+    void moveEvent(QMoveEvent *event);
 };
 
 #endif // MAINWINDOW_H

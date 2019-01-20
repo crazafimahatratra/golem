@@ -24,7 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MenuTreeWidgetEvents(new QMenu(this)),
     m_updatemanager(new UpdateManager(this)),
     m_notifier(new NotifierThread(this)),
-    m_labelnotification(new QLabel(this))
+    m_labelnotification(new QLabel(this)),
+    m_dialognotification(new DialogTasksNotification(this))
 {
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
@@ -58,7 +59,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_labelnotification->setText("Checking for new version ...");
 
     connect(m_notifier, SIGNAL(taskDueDateReached(Task*)), this, SLOT(on_taskDueDateReached(Task*)));
-    connect(m_notifier, SIGNAL(finished()), m_notifier, SLOT(deleteLater()));
     m_notifier->start();
 }
 
@@ -68,6 +68,7 @@ MainWindow::~MainWindow()
     delete m_MenuTreeWidgetEvents;
     delete m_updatemanager;
     delete m_labelnotification;
+    delete m_dialognotification;
     delete ui;
 }
 
@@ -255,6 +256,12 @@ QTreeWidgetItem *MainWindow::treeWidgetItemFromValue(QTreeWidgetItem *root, int 
     return NULL;
 }
 
+void MainWindow::moveEvent(QMoveEvent *event)
+{
+    event->accept();
+    m_dialognotification->resetPosition();
+}
+
 void MainWindow::on_treeWidgetCollections_itemSelectionChanged()
 {
     this->updateMenus();
@@ -387,5 +394,5 @@ void MainWindow::on_versionFetchError(QString error)
 
 void MainWindow::on_taskDueDateReached(Task *task)
 {
-    qDebug() << task;
+    m_dialognotification->showTask(task);
 }

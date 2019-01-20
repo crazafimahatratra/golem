@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql network
+QT       += core gui sql network multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -47,6 +47,8 @@ SOURCES += \
     dialogs/dialogabout.cpp \
     updatemanager.cpp \
     notifierthread.cpp \
+    dialogs/dialogtasksnotification.cpp \
+    dialogs/notificationelement.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -72,7 +74,9 @@ HEADERS += \
     qtkit/QSqliteWrapper/backup.h \
     dialogs/dialogabout.h \
     updatemanager.h \
-    notifierthread.h
+    notifierthread.h \
+    dialogs/dialogtasksnotification.h \
+    dialogs/notificationelement.h
 
 FORMS += \
         mainwindow.ui \
@@ -83,6 +87,8 @@ FORMS += \
     dialogs/dialogevent.ui \
     mdi/mdievents.ui \
     dialogs/dialogabout.ui \
+    dialogs/dialogtasksnotification.ui \
+    dialogs/notificationelement.ui
 
 RC_FILE = resources.rc
 
