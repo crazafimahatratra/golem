@@ -13,6 +13,7 @@ NotifierThread::NotifierThread(QObject *parent) :
 NotifierThread::~NotifierThread()
 {
     qDebug() << "finished";
+    delete m_timer;
 }
 
 void NotifierThread::start()

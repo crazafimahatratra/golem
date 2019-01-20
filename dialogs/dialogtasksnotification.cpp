@@ -75,8 +75,6 @@ void DialogTasksNotification::on_taskDone(int task_id)
         updateLabelPage();
         delete t;
     }
-    if(ui->stackedWidget->count() == 0)
-        this->hide();
 }
 
 void DialogTasksNotification::on_taskDetailsRequested(int task_id)
@@ -136,6 +134,8 @@ void DialogTasksNotification::resetPosition()
 void DialogTasksNotification::updateLabelPage()
 {
     ui->labelPage->setText(QString("%1/%2").arg(ui->stackedWidget->currentIndex() + 1).arg(ui->stackedWidget->count()));
+    if(ui->stackedWidget->count() == 0)
+        this->hide();
 }
 
 int DialogTasksNotification::taskId(int index)

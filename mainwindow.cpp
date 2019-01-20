@@ -86,6 +86,7 @@ void MainWindow::on_actionNewCollection_triggered()
 
 void MainWindow::fillTreeCollections()
 {
+    qDebug() << "Fill tree collection";
     QList<Collection *> rows = Collection::getAll<Collection>();
     ui->treeWidgetCollections->topLevelItem(0)->takeChildren();
     for(int i = 0; i < rows.length(); i++)
@@ -111,10 +112,12 @@ void MainWindow::fillTreeCollections()
     this->updateMenus();
     WidgetUtils::TreeWidget::resizeColumns(ui->treeWidgetCollections);
     WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetCollections, ui->lineEditCollections->text());
+    qDebug() << "End Fill tree collection";
 }
 
 void MainWindow::fillTreeEvents()
 {
+    qDebug() << "Fill tree events";
     QList<QDate> dates = Event::allDateEvents();
     QTreeWidgetItem *root = ui->treeWidgetEvents->topLevelItem(0);
     root->takeChildren();
@@ -125,6 +128,7 @@ void MainWindow::fillTreeEvents()
     ui->treeWidgetEvents->expandAll();
     WidgetUtils::TreeWidget::resizeColumns(ui->treeWidgetEvents);
     WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetEvents, ui->lineEditFilterEvents->text());
+    qDebug() << "End Fill tree events";
 }
 
 void MainWindow::addProjectToTree(QTreeWidgetItem *root, Project *row)
@@ -390,7 +394,7 @@ void MainWindow::on_versionFetched(bool newer, QString version)
 void MainWindow::on_versionFetchError(QString error)
 {
     m_labelnotification->setText("");
-    ui->statusBar->showMessage(error, 3000);
+    ui->statusBar->showMessage(error, 5000);
 }
 
 void MainWindow::on_taskDueDateReached(Task *task)
