@@ -14,5 +14,6 @@
     <qresource prefix="/others">
         <file>license_qt.txt</file>
         <file>ding.wav</file>
+        <file>license_fugue.txt</file>
     </qresource>
 </RCC>

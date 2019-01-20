@@ -12,13 +12,12 @@ DialogAbout::DialogAbout(QWidget *parent) :
     ui->labelAppName->setText(APP_NAME);
     ui->labelAppVersion->setText(QString("Version %1").arg(APP_VERSION));
     QString lic_qt = readlicense(":/others/license_qt.txt");
-    ui->textBrowser->setHtml(QString("<center><h1>Qt</h1></center><pre>%2</pre>"
-                                         "<center><h1>SQLite</h1></center>"
-                                         "<p style='font-family:monospace'>SQLite is a small C library that implements a self-contained, "
-                                        "embeddable, zero-configuration SQL database engine. -- quoted from www.sqlite.org."
-                                         "According to the comments in the source files, the code is in the public domain. "
-                                     "See the SQLite Copyright page on the SQLite web site for further information.</p>").arg(lic_qt));
-
+    QString lic_fugue = readlicense(":/others/license_fugue.txt");
+    ui->textBrowser->setHtml(QString("<center><h1>Fugue icons</h1></center><pre>%1</pre>"
+                                     "<center><h1>Qt</h1></center><pre>%2</pre>"
+                                     "<center><h1>SQLite</h1></center>"
+                                     "<p>SQLite is a small C library that implements a self-contained, embeddable, zero-configuration SQL database engine. -- quoted from www.sqlite.org."
+                                     "According to the comments in the source files, the code is in the public domain. See the SQLite Copyright page on the SQLite web site for further information.</p>").arg(lic_fugue).arg(lic_qt));
 }
 
 DialogAbout::~DialogAbout()
