@@ -4,15 +4,37 @@
 #include <QObject>
 #include <QDateTime>
 
+/**
+ * @brief This is a bus-like class because it transports every signals used in this project.
+ * It should be used as a singleton pattern.
+ */
 class Bus : public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Constructor
+     * @param parent : the caller parent
+     */
     explicit Bus(QObject *parent = nullptr);
+
+    /**
+     * @brief Returns the single instanciated Bus
+     * @return
+     */
     static Bus* instance();
 
 signals:
+    /**
+     * @brief raised when a project gets updated.
+     * @param project_id : id of the project Project::id
+     */
     void projectUpdated(int project_id);
+
+    /**
+     * @brief raised when a project has been deleted.
+     * @param project_id : id of the project Project::id
+     */
     void projectDeleted(int project_id);
 
     /**

@@ -35,6 +35,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    /**
+     * @brief opens the window MdiProject when it is not opened yet, or activate it.
+     * @param project_id : id of the project to be opened
+     */
     void openProject(int project_id);
 
     /**
