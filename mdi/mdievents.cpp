@@ -4,19 +4,20 @@
 #include <QDebug>
 #include <QMessageBox>
 #include "qtkit/WidgetUtils/treewidget.h"
+#include "constants.h"
+#include "bus.h"
 
-MdiEvents::MdiEvents(QDate date, MainWindow *parent) :
+MdiEvents::MdiEvents(QDate date, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MdiEvents),
     m_date(date),
-    m_parent(parent),
     m_menuEvents(new QMenu(this))
 {
     ui->setupUi(this);
     setWindowTitle("Events " + m_date.toString("yyyy-MM-dd"));
     fillEvents();
-    connect(m_parent, &MainWindow::eventUpdated, this, &MdiEvents::on_eventUpdated);
-    connect(m_parent, &MainWindow::eventDeleted, this, &MdiEvents::on_eventDeleted);
+    connect(Bus::instance(), &Bus::eventUpdated, this, &MdiEvents::on_eventUpdated);
+    connect(Bus::instance(), &Bus::eventDeleted, this, &MdiEvents::on_eventDeleted);
 
     m_menuEvents->addAction(ui->actionNew_Event);
     m_menuEvents->addAction(ui->actionEdit_Event);
@@ -124,7 +125,7 @@ QString MdiEvents::selectedEventTitle()
 
 void MdiEvents::on_actionNew_Event_triggered()
 {
-    DialogEvent dialog(0, m_parent);
+    DialogEvent dialog(0, this);
     dialog.exec();
 }
 
@@ -157,7 +158,7 @@ void MdiEvents::on_actionRemove_Event_triggered()
     Event *p = Event::findById<Event>(id);
     if(p) {
         p->remove();
-        emit m_parent->eventDeleted(p->id, p->project_id, p->evedate);
+        emit Bus::instance()->eventDeleted(p->id, p->project_id, p->evedate);
         delete p;
     }
 }
@@ -167,7 +168,7 @@ void MdiEvents::on_actionEdit_Event_triggered()
     int id = selectedEventId();
     if(!id)
         return;
-    DialogEvent dialog(id, m_parent);
+    DialogEvent dialog(id, this);
     dialog.exec();
 }
 

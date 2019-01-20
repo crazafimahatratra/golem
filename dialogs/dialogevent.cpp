@@ -1,11 +1,11 @@
 #include "dialogevent.h"
 #include "ui_dialogevent.h"
 #include "models/project.h"
+#include "bus.h"
 
-DialogEvent::DialogEvent(int id, MainWindow *parent) :
+DialogEvent::DialogEvent(int id, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogEvent),
-    m_parent(parent)
+    ui(new Ui::DialogEvent)
 {
     ui->setupUi(this);
 
@@ -66,12 +66,12 @@ void DialogEvent::on_pushButtonOK_clicked()
     if(m_event->id)
     {
         m_event->update();
-        emit m_parent->eventUpdated(m_event->id, m_event->project_id, m_event->evedate, old_project_id, old_date);
+        emit Bus::instance()->eventUpdated(m_event->id, m_event->project_id, m_event->evedate, old_project_id, old_date);
     }
     else
     {
         m_event->insert();
-        emit m_parent->eventUpdated(m_event->id, m_event->project_id, m_event->evedate, m_event->project_id, m_event->evedate);
+        emit Bus::instance()->eventUpdated(m_event->id, m_event->project_id, m_event->evedate, m_event->project_id, m_event->evedate);
     }
     this->accept();
 }

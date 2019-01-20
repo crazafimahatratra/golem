@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QDateTime>
 #include <QMenu>
-#include "mainwindow.h"
+#include <QTreeWidgetItem>
 #include "models/event.h"
 #include "models/project.h"
 #include "constants.h"
@@ -26,7 +26,7 @@ public:
      * @param date to be shown
      * @param parent widget
      */
-    explicit MdiEvents(QDate date, MainWindow *parent = 0);
+    explicit MdiEvents(QDate date, QWidget *parent = 0);
     ~MdiEvents();
 
     /**
@@ -55,7 +55,6 @@ private slots:
 private:
     Ui::MdiEvents *ui;
     QDate m_date;
-    MainWindow *m_parent;
     QMenu *m_menuEvents = nullptr;
     void updateMenu();
     void cleanTopLevelItems();

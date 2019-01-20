@@ -2,7 +2,6 @@
 #define DIALOGTASK_H
 
 #include <QDialog>
-#include "mainwindow.h"
 #include "models/project.h"
 #include "models/task.h"
 
@@ -24,7 +23,7 @@ public:
      * @param task_id : id of the task (for an update purpose)
      * @param parent : parent widget
      */
-    explicit DialogTask(int project_id, int task_id, MainWindow *parent = 0);
+    explicit DialogTask(int project_id, int task_id, QWidget *parent = 0);
     ~DialogTask();
 
 private slots:
@@ -34,7 +33,6 @@ private slots:
 
 private:
     Ui::DialogTask *ui;
-    MainWindow *m_parent;
     Task *m_task;
 };
 

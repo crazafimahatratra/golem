@@ -3,10 +3,11 @@
 #include "notificationelement.h"
 #include "models/project.h"
 #include "constants.h"
-#include "mainwindow.h"
 #include <QDebug>
 #include <QPushButton>
 #include <QSound>
+#include "bus.h"
+#include "mainwindow.h"
 
 DialogTasksNotification::DialogTasksNotification(QWidget *parent) :
     QDialog(parent),
@@ -14,9 +15,8 @@ DialogTasksNotification::DialogTasksNotification(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowFlag(Qt::FramelessWindowHint, true);
-    MainWindow *m = (MainWindow *)this->parent();
-    connect(m, SIGNAL(taskDeleted(int,int)), this, SLOT(on_taskDeleted(int,int)));
-    connect(m, SIGNAL(taskUpdated(int,int,int)), this, SLOT(on_taskUpdated(int,int,int)));
+    connect(Bus::instance(), SIGNAL(taskDeleted(int,int)), this, SLOT(on_taskDeleted(int,int)));
+    connect(Bus::instance(), SIGNAL(taskUpdated(int,int,int)), this, SLOT(on_taskUpdated(int,int,int)));
 }
 
 DialogTasksNotification::~DialogTasksNotification()
@@ -69,8 +69,7 @@ void DialogTasksNotification::on_taskDone(int task_id)
     {
         t->status = TASK_STATUS_FINISHED;
         t->update();
-        MainWindow *m = (MainWindow *)this->parent();
-        emit m->taskUpdated(t->id, t->project_id, t->project_id);
+        emit Bus::instance()->taskUpdated(t->id, t->project_id, t->project_id);
         ui->stackedWidget->removeWidget(ui->stackedWidget->widget(index));
         updateLabelPage();
         delete t;

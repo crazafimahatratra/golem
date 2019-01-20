@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include "models/collection.h"
-#include "mainwindow.h"
 
 namespace Ui {
 class DialogCollection;
@@ -22,7 +21,7 @@ public:
      * @param collection_id : id of the collection (in a case of edit)
      * @param parent : the widget parent
      */
-    explicit DialogCollection(int collection_id, MainWindow *parent = 0);
+    explicit DialogCollection(int collection_id, QWidget *parent = 0);
     ~DialogCollection();
 
 private slots:
@@ -32,7 +31,6 @@ private slots:
 
 private:
     Ui::DialogCollection *ui;
-    MainWindow *m_parent;
     Collection *m_collection;
 };
 

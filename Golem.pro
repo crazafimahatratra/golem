@@ -48,7 +48,8 @@ SOURCES += \
     updatemanager.cpp \
     notifierthread.cpp \
     dialogs/dialogtasksnotification.cpp \
-    dialogs/notificationelement.cpp
+    dialogs/notificationelement.cpp \
+    bus.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -76,7 +77,8 @@ HEADERS += \
     updatemanager.h \
     notifierthread.h \
     dialogs/dialogtasksnotification.h \
-    dialogs/notificationelement.h
+    dialogs/notificationelement.h \
+    bus.h
 
 FORMS += \
         mainwindow.ui \

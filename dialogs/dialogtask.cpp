@@ -1,11 +1,11 @@
 #include "dialogtask.h"
 #include "ui_dialogtask.h"
 #include "constants.h"
+#include "bus.h"
 
-DialogTask::DialogTask(int project_id, int task_id, MainWindow *parent) :
+DialogTask::DialogTask(int project_id, int task_id, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogTask),
-    m_parent(parent)
+    ui(new Ui::DialogTask)
 {
     ui->setupUi(this);
 
@@ -61,12 +61,12 @@ void DialogTask::on_pushButtonOK_clicked()
     if(m_task->id)
     {
         m_task->update();
-        emit m_parent->taskUpdated(m_task->id, m_task->project_id, old_project_id);
+        emit Bus::instance()->taskUpdated(m_task->id, m_task->project_id, old_project_id);
     }
     else
     {
         m_task->insert();
-        emit m_parent->taskUpdated(m_task->id, m_task->project_id, m_task->project_id);
+        emit Bus::instance()->taskUpdated(m_task->id, m_task->project_id, m_task->project_id);
     }
     this->accept();
 }

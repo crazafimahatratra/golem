@@ -3,7 +3,6 @@
 
 #include <QDialog>
 #include "models/project.h"
-#include "mainwindow.h"
 
 namespace Ui {
 class DialogProject;
@@ -23,7 +22,7 @@ public:
      * @param project_id : id of the project (for an update purpose)
      * @param parent : parent widget
      */
-    explicit DialogProject(int collection_id, int project_id, MainWindow *parent = 0);
+    explicit DialogProject(int collection_id, int project_id, QWidget *parent = 0);
     ~DialogProject();
 
 private slots:
@@ -33,7 +32,6 @@ private slots:
 
 private:
     Ui::DialogProject *ui;
-    MainWindow *m_parent;
     Project *m_project = nullptr;
 };
 

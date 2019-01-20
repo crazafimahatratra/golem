@@ -15,6 +15,7 @@
 #include "qtkit/QSqliteWrapper/backup.h"
 #include "appversion.h"
 #include "updatemanager.h"
+#include "bus.h"
 
 int const MainWindow::EXIT_CODE_REBOOT = -123456789;
 MainWindow::MainWindow(QWidget *parent) :
@@ -42,14 +43,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fillTreeEvents();
 
-    connect(this, &MainWindow::collectionUpdated, this, &MainWindow::fillTreeCollections);
-    connect(this, &MainWindow::collectionDeleted, this, &MainWindow::fillTreeCollections);
-    connect(this, &MainWindow::projectUpdated, this, &MainWindow::fillTreeCollections);
-    connect(this, &MainWindow::projectDeleted, this, &MainWindow::fillTreeCollections);
-    connect(this, &MainWindow::taskUpdated, this, &MainWindow::fillTreeCollections);
-    connect(this, &MainWindow::taskDeleted, this, &MainWindow::fillTreeCollections);
-    connect(this, &MainWindow::eventUpdated, this, &MainWindow::fillTreeEvents);
-    connect(this, &MainWindow::eventDeleted, this, &MainWindow::fillTreeEvents);
+    connect(Bus::instance(), &Bus::collectionUpdated, this, &MainWindow::fillTreeCollections);
+    connect(Bus::instance(), &Bus::collectionDeleted, this, &MainWindow::fillTreeCollections);
+    connect(Bus::instance(), &Bus::projectUpdated, this, &MainWindow::fillTreeCollections);
+    connect(Bus::instance(), &Bus::projectDeleted, this, &MainWindow::fillTreeCollections);
+    connect(Bus::instance(), &Bus::taskUpdated, this, &MainWindow::fillTreeCollections);
+    connect(Bus::instance(), &Bus::taskDeleted, this, &MainWindow::fillTreeCollections);
+    connect(Bus::instance(), &Bus::eventUpdated, this, &MainWindow::fillTreeEvents);
+    connect(Bus::instance(), &Bus::eventDeleted, this, &MainWindow::fillTreeEvents);
 
     m_updatemanager->check(APP_VERSION, "https://chraz-golem.sourceforge.io/current_version.json");
     connect(m_updatemanager, SIGNAL(versionFetched(bool,QString)), this, SLOT(on_versionFetched(bool,QString)));
@@ -300,7 +301,7 @@ void MainWindow::on_actionRemove_Collection_triggered()
     Collection *c = Collection::findById<Collection>(id);
     if(c) {
         c->remove();
-        emit this->collectionDeleted(c->id);
+        emit Bus::instance()->collectionDeleted(c->id);
         delete c;
     }
 }
@@ -324,7 +325,7 @@ void MainWindow::on_actionRemove_Project_triggered()
     Project *p = Project::findById<Project>(id);
     if(p) {
         p->remove();
-        emit this->projectDeleted(p->id);
+        emit Bus::instance()->projectDeleted(p->id);
         delete p;
     }
 }

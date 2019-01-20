@@ -2,7 +2,6 @@
 #define DIALOGEVENT_H
 
 #include <QDialog>
-#include "mainwindow.h"
 #include "models/event.h"
 
 namespace Ui {
@@ -22,7 +21,7 @@ public:
      * @param id : id of the event (for editing purpose)
      * @param parent widget
      */
-    explicit DialogEvent(int id, MainWindow *parent = 0);
+    explicit DialogEvent(int id, QWidget *parent = 0);
 
     /**
      * @brief set the selected project
@@ -38,7 +37,6 @@ private slots:
 
 private:
     Ui::DialogEvent *ui;
-    MainWindow *m_parent;
     Event *m_event;
 };
 

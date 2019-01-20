@@ -2,11 +2,11 @@
 #include "ui_dialogproject.h"
 #include "models/collection.h"
 #include "models/project.h"
+#include "bus.h"
 
-DialogProject::DialogProject(int collection_id, int project_id, MainWindow *parent) :
+DialogProject::DialogProject(int collection_id, int project_id, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::DialogProject),
-    m_parent(parent)
+    ui(new Ui::DialogProject)
 {
     ui->setupUi(this);
     if(project_id)
@@ -52,7 +52,7 @@ void DialogProject::on_pushButtonOK_clicked()
         m_project->update();
     else
         m_project->insert();
-    emit m_parent->projectUpdated(m_project->id);
+    emit Bus::instance()->projectUpdated(m_project->id);
     this->accept();
 }
 

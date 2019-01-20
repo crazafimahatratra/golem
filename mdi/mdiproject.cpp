@@ -7,11 +7,11 @@
 #include <QDebug>
 #include "qtkit/WidgetUtils/tablewidget.h"
 #include "qtkit/WidgetUtils/treewidget.h"
+#include "bus.h"
 
-MdiProject::MdiProject(int id, MainWindow *parent) :
+MdiProject::MdiProject(int id, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MdiProject),
-    m_parent(parent)
+    ui(new Ui::MdiProject)
 {
     ui->setupUi(this);
 
@@ -32,14 +32,14 @@ MdiProject::MdiProject(int id, MainWindow *parent) :
     m_menuEvents->addAction(ui->actionEdit_Event);
     m_menuEvents->addAction(ui->actionRemove_Event);
 
-    connect(m_parent, &MainWindow::collectionUpdated, this, &MdiProject::on_collectionUpdated);
-    connect(m_parent, &MainWindow::collectionDeleted, this, &MdiProject::on_collectionDeleted);
-    connect(m_parent, &MainWindow::projectUpdated, this, &MdiProject::on_projectUpdated);
-    connect(m_parent, &MainWindow::projectDeleted, this, &MdiProject::on_projectDeleted);
-    connect(m_parent, &MainWindow::taskUpdated, this, &MdiProject::on_taskUpdated);
-    connect(m_parent, &MainWindow::taskDeleted, this, &MdiProject::on_taskDeleted);
-    connect(m_parent, &MainWindow::eventUpdated, this, &MdiProject::on_eventUpdated);
-    connect(m_parent, &MainWindow::eventDeleted, this, &MdiProject::on_eventDeleted);
+    connect(Bus::instance(), &Bus::collectionUpdated, this, &MdiProject::on_collectionUpdated);
+    connect(Bus::instance(), &Bus::collectionDeleted, this, &MdiProject::on_collectionDeleted);
+    connect(Bus::instance(), &Bus::projectUpdated, this, &MdiProject::on_projectUpdated);
+    connect(Bus::instance(), &Bus::projectDeleted, this, &MdiProject::on_projectDeleted);
+    connect(Bus::instance(), &Bus::taskUpdated, this, &MdiProject::on_taskUpdated);
+    connect(Bus::instance(), &Bus::taskDeleted, this, &MdiProject::on_taskDeleted);
+    connect(Bus::instance(), &Bus::eventUpdated, this, &MdiProject::on_eventUpdated);
+    connect(Bus::instance(), &Bus::eventDeleted, this, &MdiProject::on_eventDeleted);
 }
 
 MdiProject::~MdiProject()
@@ -54,7 +54,7 @@ MdiProject::~MdiProject()
 
 void MdiProject::on_actionNewTask_triggered()
 {
-    DialogTask dialog(m_project->id, 0, m_parent);
+    DialogTask dialog(m_project->id, 0, this);
     dialog.exec();
 }
 
@@ -184,7 +184,7 @@ void MdiProject::on_actionRemove_Task_triggered()
     Task *p = Task::findById<Task>(id);
     if(p) {
         p->remove();
-        emit m_parent->taskDeleted(p->id, p->project_id);
+        emit Bus::instance()->taskDeleted(p->id, p->project_id);
         delete p;
     }
 }
@@ -194,7 +194,7 @@ void MdiProject::on_actionEdit_Task_triggered()
     int id = selectedTaskId();
     if(!id)
         return;
-    DialogTask dialog(m_project->id, id, m_parent);
+    DialogTask dialog(m_project->id, id, this);
     dialog.exec();
 }
 
@@ -261,7 +261,7 @@ void MdiProject::on_actionMark_As_Done_triggered()
         return;
     t->status = TASK_STATUS_FINISHED;
     t->update();
-    emit m_parent->taskUpdated(t->id, t->project_id, t->project_id);
+    emit Bus::instance()->taskUpdated(t->id, t->project_id, t->project_id);
     delete t;
 }
 
@@ -276,7 +276,7 @@ void MdiProject::on_actionRestart_triggered()
         return;
     t->status = TASK_STATUS_STARTED;
     t->update();
-    emit m_parent->taskUpdated(t->id, t->project_id, t->project_id);
+    emit Bus::instance()->taskUpdated(t->id, t->project_id, t->project_id);
     delete t;
 }
 
@@ -351,7 +351,7 @@ void MdiProject::on_tableWidget_cellDoubleClicked(int, int)
 
 void MdiProject::on_actionNew_Event_triggered()
 {
-    DialogEvent dialog(0, m_parent);
+    DialogEvent dialog(0, this);
     dialog.setSelectedProject(m_project->id);
     dialog.exec();
 }
@@ -366,7 +366,7 @@ void MdiProject::on_actionEdit_Event_triggered()
     int id = selectedEventId();
     if(!id)
         return;
-    DialogEvent dialog(id, m_parent);
+    DialogEvent dialog(id, this);
     dialog.exec();
 }
 
@@ -383,7 +383,7 @@ void MdiProject::on_actionRemove_Event_triggered()
     Event *p = Event::findById<Event>(id);
     if(p) {
         p->remove();
-        emit m_parent->eventDeleted(p->id, p->project_id, p->evedate);
+        emit Bus::instance()->eventDeleted(p->id, p->project_id, p->evedate);
         delete p;
     }
 }

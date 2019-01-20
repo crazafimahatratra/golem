@@ -8,7 +8,6 @@
 #include "models/collection.h"
 #include "models/task.h"
 #include "models/event.h"
-#include "mainwindow.h"
 
 #define TREEVIEW_TYPE_TASK 1
 
@@ -30,7 +29,7 @@ public:
      * @param id of the project to be shown
      * @param parent widget
      */
-    explicit MdiProject(int id, MainWindow *parent = 0);
+    explicit MdiProject(int id, QWidget *parent = 0);
     ~MdiProject();
 
     /**
@@ -93,7 +92,6 @@ private slots:
 
 private:
     Ui::MdiProject *ui;
-    MainWindow *m_parent;
     Project *m_project = nullptr;
     Collection *m_collection = nullptr;
     QMenu *m_menuTasks = nullptr;
