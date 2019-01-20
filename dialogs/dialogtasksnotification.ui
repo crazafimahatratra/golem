@@ -34,7 +34,6 @@
      <property name="styleSheet">
       <string notr="true">QFrame#frame {
 border: 1px solid #98AAFB;
-border-radius: 4px;
 padding: 5px;
 }</string>
      </property>

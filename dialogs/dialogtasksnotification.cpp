@@ -114,7 +114,7 @@ void DialogTasksNotification::on_taskUpdated(int task_id, int, int)
     Task *t = Task::findById<Task>(task_id);
     if(!t)
         return;
-    if(t->status == TASK_STATUS_FINISHED)
+    if(t->status == TASK_STATUS_FINISHED || t->dueDate > QDateTime::currentDateTime())
     {
         ui->stackedWidget->removeWidget(widget);
         updateLabelPage();
