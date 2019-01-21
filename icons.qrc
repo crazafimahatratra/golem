@@ -34,5 +34,8 @@
         <file>icons/database--arrow.png</file>
         <file>icons/golem.png</file>
         <file>icons/golem-256.png</file>
+        <file>icons/exclamation-red.png</file>
+        <file>icons/exclamation-white.png</file>
+        <file>icons/16x16-empty.png</file>
     </qresource>
 </RCC>

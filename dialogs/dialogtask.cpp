@@ -37,6 +37,19 @@ DialogTask::DialogTask(int project_id, int task_id, QWidget *parent) :
     ui->lineEditTitle->setText(m_task->title);
     ui->textEditContent->setHtml(m_task->content);
     ui->dateTimeEditDueDate->setDateTime(m_task->dueDate);
+
+    // task priorities
+    ui->comboBoxPriority->addItem("Less important", Task::LessImportant);
+    ui->comboBoxPriority->addItem("Normal", Task::Normal);
+    ui->comboBoxPriority->addItem("Important", Task::Important);
+    for(int i = 0; i < ui->comboBoxPriority->count(); i++)
+    {
+        if(ui->comboBoxPriority->itemData(i).toInt() == m_task->priority)
+        {
+            ui->comboBoxPriority->setCurrentIndex(i);
+            break;
+        }
+    }
 }
 
 DialogTask::~DialogTask()
@@ -58,6 +71,7 @@ void DialogTask::on_pushButtonOK_clicked()
     m_task->title = ui->lineEditTitle->text();
     m_task->dueDate = ui->dateTimeEditDueDate->dateTime();
     m_task->content = ui->textEditContent->toHtml();
+    m_task->priority = ui->comboBoxPriority->currentData(Qt::UserRole).toInt();
     if(m_task->id)
     {
         m_task->update();

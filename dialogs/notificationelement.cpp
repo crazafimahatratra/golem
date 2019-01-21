@@ -19,6 +19,18 @@ void NotificationElement::setTask(Task *task)
 {
     ui->labelTitle->setText(task->title);
     ui->labelText->setText(task->dueDate.toString(DATETIME_FORMAT));
+    if(task->priority == Task::Important)
+    {
+        ui->labelIcon->setPixmap(QPixmap(":/png/icons/exclamation-red.png"));
+    }
+    else if(task->priority == Task::LessImportant)
+    {
+        ui->labelIcon->setPixmap(QPixmap(":/png/icons/exclamation-white.png"));
+    }
+    else if(task->priority == Task::Normal)
+    {
+        ui->labelIcon->setPixmap(QPixmap(":/png/icons/16x16-empty.png"));
+    }
     Project *p = Project::findById<Project>(task->project_id);
     if(p)
     {

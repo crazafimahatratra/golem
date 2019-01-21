@@ -3,7 +3,7 @@
 
 Task::Task():QSqliteWrapper::Table("task")
 {
-
+    this->priority = 0;
 }
 
 Task::timelineCategory Task::getTimelineCategory()

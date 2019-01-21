@@ -82,9 +82,21 @@ void MdiProject::fillTasks()
         item->setText(0, rows[i]->title);
         item->setText(1, rows[i]->dueDate.toString(DATETIME_FORMAT));
         if(rows[i]->status == TASK_STATUS_FINISHED) {
-            item->setIcon(0, QIcon(":/png/icons/tick.png"));
+            item->setIcon(1, QIcon(":/png/icons/tick.png"));
         } else {
-            item->setIcon(0, QIcon(":/png/icons/clock.png"));
+            item->setIcon(1, QIcon(":/png/icons/clock.png"));
+        }
+        if(rows[i]->priority == Task::Important)
+        {
+            item->setIcon(0, QIcon(":/png/icons/exclamation-red.png"));
+        }
+        else if(rows[i]->priority == Task::LessImportant)
+        {
+            item->setIcon(0, QIcon(":/png/icons/exclamation-white.png"));
+        }
+        else if(rows[i]->priority == Task::Normal)
+        {
+            item->setIcon(0, QIcon(":/png/icons/16x16-empty.png"));
         }
         Task::timelineCategory category = rows[i]->getTimelineCategory();
         root = ui->treeWidget->topLevelItem(category);

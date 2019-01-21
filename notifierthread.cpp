@@ -23,7 +23,6 @@ void NotifierThread::start()
 
 void NotifierThread::onTimeout()
 {
-    qDebug() << "Check reached tasks " << QDateTime::currentDateTime();
     Task *model = new Task();
     model->where("duedate <=", QDateTime::currentDateTime())
             ->where("status = ", TASK_STATUS_STARTED)

@@ -14,12 +14,21 @@ public:
     // Table interface
 public:
     /**
-     * @brief category of a task regarding its due date
+     * @brief Category of a task regarding its due date
      */
     enum timelineCategory {
         Overdue = 0,    ///< The task is overdue
         Today = 1,      ///< The task is for today
         UpNext = 2      ///< The task is for tomorrow or even later.
+    };
+
+    /**
+     * @brief Priorities of tasks
+     */
+    enum taskPriority {
+        LessImportant   = -1,   ///< Less important
+        Normal          = 0,    ///< Priority normal
+        Important       = 1,    ///< An important task
     };
 
     QString pkName() { return "id"; }
@@ -33,6 +42,7 @@ public:
         this->content = record.value("content").toString();
         this->dueDate = record.value("duedate").toDateTime();
         this->status = record.value("status").toInt();
+        this->priority = record.value("priority").toInt();
     }
     QList<QSqliteWrapper::Parameter> prepareParameters()
     {
@@ -42,6 +52,7 @@ public:
         parameters.append(QSqliteWrapper::Parameter("content", this->content));
         parameters.append(QSqliteWrapper::Parameter("duedate", this->dueDate));
         parameters.append(QSqliteWrapper::Parameter("status", this->status));
+        parameters.append(QSqliteWrapper::Parameter("priority", this->priority));
         return parameters;
     }
 
@@ -52,7 +63,7 @@ public:
     timelineCategory getTimelineCategory();
 
     /**
-     * @brief count tasks by project `(SELECT count(*), project_id FROM project)`
+     * @brief Count tasks by project `(SELECT count(*), project_id FROM project)`
      * @return a map containing id_project and the number of tasks inside.
      */
     static QMap<int, int> countByProject();
@@ -69,17 +80,17 @@ public:
     int project_id;
 
     /**
-     * @brief title of the task
+     * @brief Title of the task
      */
     QString title;
 
     /**
-     * @brief content of the task (comment)
+     * @brief Content of the task (comment)
      */
     QString content;
 
     /**
-     * @brief task due date
+     * @brief Task due date
      */
     QDateTime dueDate;
 
@@ -88,6 +99,11 @@ public:
      * @see constants.h
      */
     int status;
+
+    /**
+     * @brief Task priority
+     */
+    int priority;
 };
 
 #endif // TASK_H
