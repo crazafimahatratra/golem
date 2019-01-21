@@ -50,6 +50,8 @@ private slots:
 
     void on_taskUpdated(int task_id, int, int);
 
+    void on_pushButton_clicked();
+
 private:
     Ui::DialogTasksNotification *ui;
     void updateLabelPage();

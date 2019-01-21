@@ -157,3 +157,8 @@ int DialogTasksNotification::taskIndex(int task_id)
     }
     return -1;
 }
+
+void DialogTasksNotification::on_pushButton_clicked()
+{
+    this->hide();
+}

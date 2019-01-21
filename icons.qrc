@@ -38,4 +38,10 @@
         <file>icons/exclamation-white.png</file>
         <file>icons/16x16-empty.png</file>
     </qresource>
+    <qresource prefix="/flat">
+        <file>icons/flat/delete.png</file>
+        <file>icons/flat/settings-work-tool.png</file>
+        <file>icons/flat/chevron-pointing-to-the-left.png</file>
+        <file>icons/flat/right-chevron.png</file>
+    </qresource>
 </RCC>
