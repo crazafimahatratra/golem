@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(m_updatemanager, SIGNAL(versionFetched(bool,QString)), this, SLOT(on_versionFetched(bool,QString)));
     connect(m_updatemanager, SIGNAL(versionFetchError(QString)), this, SLOT(on_versionFetchError(QString)));
-    m_updatemanager->start();
+    //m_updatemanager->start();
 
     ui->statusBar->addPermanentWidget(m_labelnotification);
     m_labelnotification->setText("Checking for new version ...");

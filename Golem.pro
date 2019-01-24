@@ -49,7 +49,9 @@ SOURCES += \
     notifierthread.cpp \
     dialogs/dialogtasksnotification.cpp \
     dialogs/notificationelement.cpp \
-    bus.cpp
+    bus.cpp \
+    qtkit/WidgetUtils/rtfeditor.cpp \
+    qtkit/WidgetUtils/texteditor.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -78,7 +80,9 @@ HEADERS += \
     notifierthread.h \
     dialogs/dialogtasksnotification.h \
     dialogs/notificationelement.h \
-    bus.h
+    bus.h \
+    qtkit/WidgetUtils/rtfeditor.h \
+    qtkit/WidgetUtils/texteditor.h
 
 FORMS += \
         mainwindow.ui \
@@ -90,7 +94,8 @@ FORMS += \
     mdi/mdievents.ui \
     dialogs/dialogabout.ui \
     dialogs/dialogtasksnotification.ui \
-    dialogs/notificationelement.ui
+    dialogs/notificationelement.ui \
+    qtkit/WidgetUtils/rtfeditor.ui
 
 RC_FILE = resources.rc
 
@@ -101,4 +106,5 @@ DISTFILES += \
 
 RESOURCES += \
     icons.qrc \
-    files.qrc
+    files.qrc \
+    qtkit/WidgetUtils/qtkiticons.qrc
