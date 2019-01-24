@@ -51,7 +51,8 @@ SOURCES += \
     dialogs/notificationelement.cpp \
     bus.cpp \
     qtkit/WidgetUtils/rtfeditor.cpp \
-    qtkit/WidgetUtils/texteditor.cpp
+    qtkit/WidgetUtils/texteditor.cpp \
+    mdi/tableevents.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -82,7 +83,8 @@ HEADERS += \
     dialogs/notificationelement.h \
     bus.h \
     qtkit/WidgetUtils/rtfeditor.h \
-    qtkit/WidgetUtils/texteditor.h
+    qtkit/WidgetUtils/texteditor.h \
+    mdi/tableevents.h
 
 FORMS += \
         mainwindow.ui \

@@ -42,6 +42,7 @@ MdiProject::MdiProject(int id, QWidget *parent) :
     connect(Bus::instance(), &Bus::taskDeleted, this, &MdiProject::on_taskDeleted);
     connect(Bus::instance(), &Bus::eventUpdated, this, &MdiProject::on_eventUpdated);
     connect(Bus::instance(), &Bus::eventDeleted, this, &MdiProject::on_eventDeleted);
+    connect(ui->tableWidget, &TableEvents::taskReceived, this, &MdiProject::convertTaskToEvent);
 }
 
 MdiProject::~MdiProject()
@@ -183,6 +184,25 @@ int MdiProject::selectedTaskStatus()
     if(ui->treeWidget->currentItem()->type() != TREEVIEW_TYPE_TASK)
         return 0;
     return ui->treeWidget->currentItem()->data(0, Qt::UserRole + 1).toInt();
+}
+
+void MdiProject::convertTaskToEvent(int task_id)
+{
+    Task *t = Task::findById<Task>(task_id);
+    if(!t)
+        return;
+    Event m;
+    m.content = t->content;
+    m.evedate = t->dueDate;
+    m.project_id = t->project_id;
+    m.title = t->title;
+    if(m.insert().toInt())
+    {
+        t->remove();
+        emit Bus::instance()->eventUpdated(m.id, m.project_id, m.evedate, m.project_id, m.evedate);
+        emit Bus::instance()->taskDeleted(t->id, t->project_id);
+    }
+    delete t;
 }
 
 void MdiProject::on_actionRemove_Task_triggered()
@@ -409,19 +429,5 @@ void MdiProject::on_tableWidget_customContextMenuRequested(const QPoint &pos)
 void MdiProject::on_actionConvertToEvent_triggered()
 {
     int task_id = selectedTaskId();
-    Task *t = Task::findById<Task>(task_id);
-    if(!t)
-        return;
-    Event m;
-    m.content = t->content;
-    m.evedate = t->dueDate;
-    m.project_id = t->project_id;
-    m.title = t->title;
-    if(m.insert().toInt())
-    {
-        t->remove();
-        emit Bus::instance()->eventUpdated(m.id, m.project_id, m.evedate, m.project_id, m.evedate);
-        emit Bus::instance()->taskDeleted(t->id, t->project_id);
-    }
-    delete t;
+    convertTaskToEvent(task_id);
 }

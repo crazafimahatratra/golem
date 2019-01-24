@@ -108,6 +108,7 @@ private:
     QString selectedTaskTitle();
     QString selectedEventTitle();
     int selectedTaskStatus();
+    void convertTaskToEvent(int task_id);
 };
 
 #endif // MDIPROJECT_H
