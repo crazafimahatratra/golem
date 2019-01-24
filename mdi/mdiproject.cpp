@@ -26,6 +26,8 @@ MdiProject::MdiProject(int id, QWidget *parent) :
     m_menuTasks->addSeparator();
     m_menuTasks->addAction(ui->actionMark_As_Done);
     m_menuTasks->addAction(ui->actionRestart);
+    m_menuTasks->addSeparator();
+    m_menuTasks->addAction(ui->actionConvertToEvent);
 
     m_menuEvents = new QMenu(this);
     m_menuEvents->addAction(ui->actionNew_Event);
@@ -218,8 +220,7 @@ void MdiProject::updateMenuTasks()
     ui->actionRemove_Task->setEnabled(taskSelected);
     ui->actionMark_As_Done->setEnabled(taskSelected && (status == TASK_STATUS_STARTED));
     ui->actionRestart->setEnabled(taskSelected && (status == TASK_STATUS_FINISHED));
-
-
+    ui->actionConvertToEvent->setEnabled(taskSelected);
 }
 
 void MdiProject::updateMenuEvents()
@@ -403,4 +404,24 @@ void MdiProject::on_actionRemove_Event_triggered()
 void MdiProject::on_tableWidget_customContextMenuRequested(const QPoint &pos)
 {
     m_menuEvents->popup(ui->tableWidget->mapToGlobal(pos));
+}
+
+void MdiProject::on_actionConvertToEvent_triggered()
+{
+    int task_id = selectedTaskId();
+    Task *t = Task::findById<Task>(task_id);
+    if(!t)
+        return;
+    Event m;
+    m.content = t->content;
+    m.evedate = t->dueDate;
+    m.project_id = t->project_id;
+    m.title = t->title;
+    if(m.insert().toInt())
+    {
+        t->remove();
+        emit Bus::instance()->eventUpdated(m.id, m.project_id, m.evedate, m.project_id, m.evedate);
+        emit Bus::instance()->taskDeleted(t->id, t->project_id);
+    }
+    delete t;
 }

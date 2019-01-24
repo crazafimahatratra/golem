@@ -343,6 +343,15 @@
     <string>Remove Event</string>
    </property>
   </action>
+  <action name="actionConvertToEvent">
+   <property name="icon">
+    <iconset resource="../icons.qrc">
+     <normaloff>:/png/icons/calendar-next.png</normaloff>:/png/icons/calendar-next.png</iconset>
+   </property>
+   <property name="text">
+    <string>Convert To Event</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../icons.qrc"/>

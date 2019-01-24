@@ -90,6 +90,8 @@ private slots:
 
     void on_tableWidget_customContextMenuRequested(const QPoint &pos);
 
+    void on_actionConvertToEvent_triggered();
+
 private:
     Ui::MdiProject *ui;
     Project *m_project = nullptr;

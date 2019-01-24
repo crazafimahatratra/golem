@@ -37,6 +37,7 @@
         <file>icons/exclamation-red.png</file>
         <file>icons/exclamation-white.png</file>
         <file>icons/16x16-empty.png</file>
+        <file>icons/calendar-next.png</file>
     </qresource>
     <qresource prefix="/flat">
         <file>icons/flat/delete.png</file>
