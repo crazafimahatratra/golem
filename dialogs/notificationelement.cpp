@@ -8,6 +8,9 @@ NotificationElement::NotificationElement(QWidget *parent) :
 {
     ui->setupUi(this);
     m_taskid = 0;
+    ui->labelTitle->setTextFormat(Qt::RichText);
+    ui->labelProjectName->setTextFormat(Qt::RichText);
+    ui->labelText->setTextFormat(Qt::RichText);
 }
 
 NotificationElement::~NotificationElement()
@@ -17,8 +20,14 @@ NotificationElement::~NotificationElement()
 
 void NotificationElement::setTask(Task *task)
 {
-    ui->labelTitle->setText(task->title);
-    ui->labelText->setText(task->dueDate.toString(DATETIME_FORMAT));
+    QString color="black";
+    Task::timelineCategory category = task->getTimelineCategory();
+    if(category == Task::Overdue)
+    {
+        color = "red";
+    }
+    ui->labelTitle->setText(QString("<font color='%2'>%1</font>").arg(task->title).arg(color));
+    ui->labelText->setText(QString("<font color='%2'>%1</font>").arg(task->dueDate.toString(DATETIME_FORMAT)).arg(color));
     if(task->priority == Task::Important)
     {
         ui->labelIcon->setPixmap(QPixmap(":/png/icons/exclamation-red.png"));
@@ -34,9 +43,14 @@ void NotificationElement::setTask(Task *task)
     Project *p = Project::findById<Project>(task->project_id);
     if(p)
     {
-        ui->labelProjectName->setText(p->name);
+        ui->labelProjectName->setText(QString("<font color='%2'>%1</font>").arg(p->name).arg(color));
         delete p;
     }
+    else
+    {
+        ui->labelProjectName->setText("[UNKOWN]");
+    }
+
     m_taskid = task->id;
 }
 
