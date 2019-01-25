@@ -189,7 +189,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTreeWidget" name="treeWidgetCollections">
+      <widget class="TreeCollections" name="treeWidgetCollections">
        <property name="contextMenuPolicy">
         <enum>Qt::CustomContextMenu</enum>
        </property>
@@ -318,6 +318,13 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>TreeCollections</class>
+   <extends>QTreeWidget</extends>
+   <header>treecollections.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="icons.qrc"/>
  </resources>

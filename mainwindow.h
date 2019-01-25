@@ -89,6 +89,8 @@ private slots:
 
     void on_taskDueDateReached(Task *task);
 
+    void on_taskDroped(int task_id, int project_id);
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;

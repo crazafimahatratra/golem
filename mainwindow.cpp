@@ -61,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(m_notifier, SIGNAL(taskDueDateReached(Task*)), this, SLOT(on_taskDueDateReached(Task*)));
     m_notifier->start();
+
+    connect(ui->treeWidgetCollections, &TreeCollections::taskDroped, this, &MainWindow::on_taskDroped);
 }
 
 MainWindow::~MainWindow()
@@ -401,4 +403,19 @@ void MainWindow::on_taskDueDateReached(Task *task)
 {
     this->show();
     m_dialognotification->showTask(task);
+}
+
+void MainWindow::on_taskDroped(int task_id, int project_id)
+{
+    Task *t = Task::findById<Task>(task_id);
+    if(!t)
+        return;
+    int old_project_id = t->project_id;
+    if(old_project_id != project_id)
+    {
+        t->project_id = project_id;
+        t->update();
+        emit Bus::instance()->taskUpdated(task_id, project_id, old_project_id);
+    }
+    delete t;
 }

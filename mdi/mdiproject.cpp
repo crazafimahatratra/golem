@@ -82,6 +82,7 @@ void MdiProject::fillTasks()
         QTreeWidgetItem *item = new QTreeWidgetItem(TREEVIEW_TYPE_TASK);
         item->setData(0, Qt::UserRole, rows[i]->id);
         item->setData(0, Qt::UserRole + 1, rows[i]->status);
+        item->setData(0, Qt::UserRole + 2, rows[i]->project_id);
         item->setText(0, rows[i]->title);
         item->setText(1, rows[i]->dueDate.toString(DATETIME_FORMAT));
         if(rows[i]->status == TASK_STATUS_FINISHED) {
@@ -190,6 +191,10 @@ void MdiProject::convertTaskToEvent(int task_id)
 {
     Task *t = Task::findById<Task>(task_id);
     if(!t)
+        return;
+    int res = QMessageBox::warning(this, "Confirmation", "This operation will convert the task " + t->title + "\nto an event.\n\n"
+                                                          "Are you sure ?", QMessageBox::Yes|QMessageBox::No);
+    if(res != QMessageBox::Yes)
         return;
     Event m;
     m.content = t->content;

@@ -52,7 +52,8 @@ SOURCES += \
     bus.cpp \
     qtkit/WidgetUtils/rtfeditor.cpp \
     qtkit/WidgetUtils/texteditor.cpp \
-    mdi/tableevents.cpp
+    mdi/tableevents.cpp \
+    treecollections.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -84,7 +85,8 @@ HEADERS += \
     bus.h \
     qtkit/WidgetUtils/rtfeditor.h \
     qtkit/WidgetUtils/texteditor.h \
-    mdi/tableevents.h
+    mdi/tableevents.h \
+    treecollections.h
 
 FORMS += \
         mainwindow.ui \
