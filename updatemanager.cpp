@@ -3,10 +3,11 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVersionNumber>
+#include <QNetworkConfiguration>
 
 UpdateManager::UpdateManager(QString version, QString url, QObject *parent) :
     QObject(parent),
-    m_manager(new QNetworkAccessManager(parent)),
+    m_manager(new QNetworkAccessManager(this)),
     m_localversion(version),
     m_url(url)
 {
@@ -22,7 +23,10 @@ UpdateManager::~UpdateManager()
 void UpdateManager::start()
 {
     qDebug() << "Open " << m_url;
+    qDebug() << m_manager->configuration().connectTimeout();
     m_manager->get(QNetworkRequest(QUrl(m_url)));
+    qDebug() << "Wait fetching ...";
+    emit this->fetchStarted();
 }
 
 void UpdateManager::onFinished(QNetworkReply *reply)

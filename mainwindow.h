@@ -83,6 +83,8 @@ private slots:
 
     void on_lineEditCollections_textChanged(const QString &arg1);
 
+    void on_versionFetchStarted();
+
     void on_versionFetched(bool newer, QString version);
 
     void on_versionFetchError(QString error);

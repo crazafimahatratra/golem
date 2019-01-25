@@ -23,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_MenuTreeWidgetCollections(new QMenu(this)),
     m_MenuTreeWidgetEvents(new QMenu(this)),
-    m_updatemanager(new UpdateManager(APP_VERSION, "https://chraz-golem.sourceforge.io/current_version.json", this)),
+    m_updatemanager(new UpdateManager(APP_VERSION, APP_VERSION_URL, this)),
     m_notifier(new NotifierThread(this)),
     m_labelnotification(new QLabel(this)),
     m_dialognotification(new DialogTasksNotification(this))
@@ -43,6 +43,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fillTreeEvents();
 
+    ui->statusBar->addPermanentWidget(m_labelnotification);
+    m_labelnotification->setText("");
+
     connect(Bus::instance(), &Bus::collectionUpdated, this, &MainWindow::fillTreeCollections);
     connect(Bus::instance(), &Bus::collectionDeleted, this, &MainWindow::fillTreeCollections);
     connect(Bus::instance(), &Bus::projectUpdated, this, &MainWindow::fillTreeCollections);
@@ -52,12 +55,10 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(Bus::instance(), &Bus::eventUpdated, this, &MainWindow::fillTreeEvents);
     connect(Bus::instance(), &Bus::eventDeleted, this, &MainWindow::fillTreeEvents);
 
-    connect(m_updatemanager, SIGNAL(versionFetched(bool,QString)), this, SLOT(on_versionFetched(bool,QString)));
-    connect(m_updatemanager, SIGNAL(versionFetchError(QString)), this, SLOT(on_versionFetchError(QString)));
-    //m_updatemanager->start();
-
-    ui->statusBar->addPermanentWidget(m_labelnotification);
-    m_labelnotification->setText("Checking for new version ...");
+    connect(m_updatemanager, &UpdateManager::versionFetched, this, &MainWindow::on_versionFetched);
+    connect(m_updatemanager, &UpdateManager::versionFetchError, this, &MainWindow::on_versionFetchError);
+    connect(m_updatemanager, &UpdateManager::fetchStarted, this, &MainWindow::on_versionFetchStarted);
+    m_updatemanager->start();
 
     connect(m_notifier, SIGNAL(taskDueDateReached(Task*)), this, SLOT(on_taskDueDateReached(Task*)));
     m_notifier->start();
@@ -382,12 +383,17 @@ void MainWindow::on_lineEditCollections_textChanged(const QString &arg1)
     WidgetUtils::TreeWidget::filterTreeItems(ui->treeWidgetCollections, arg1);
 }
 
+void MainWindow::on_versionFetchStarted()
+{
+    m_labelnotification->setText("Checking for new version ...");
+}
+
 void MainWindow::on_versionFetched(bool newer, QString version)
 {
     if(newer) {
         m_labelnotification->setOpenExternalLinks(true);
         m_labelnotification->setText("A new version is available : <strong>" + version + "</strong>"
-            ". Click <a href='https://chraz-golem.sourceforge.io/'>here</a> to download it");
+            ". Click <a href='" + APP_UPGRADE_URl + "'>here</a> to download it.");
     } else {
         m_labelnotification->setText("Your application is up to date");
     }

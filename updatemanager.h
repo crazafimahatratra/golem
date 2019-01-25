@@ -40,6 +40,10 @@ public:
 
 signals:
     /**
+     * @brief when fetching is started
+     */
+    void fetchStarted();
+    /**
      * @brief raised when the version was fetched successfully
      * @param newer : true if the online version is newer than the current running version
      * @param version : the online version fetched
