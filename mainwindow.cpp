@@ -4,6 +4,7 @@
 #include "dialogs/dialogproject.h"
 #include "dialogs/dialogevent.h"
 #include "dialogs/dialogabout.h"
+#include "dialogs/dialogoptions.h"
 #include "mdi/mdiproject.h"
 #include "mdi/mdievents.h"
 #include "models/collection.h"
@@ -23,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_MenuTreeWidgetCollections(new QMenu(this)),
     m_MenuTreeWidgetEvents(new QMenu(this)),
-    m_updatemanager(new UpdateManager(APP_VERSION, APP_VERSION_URL, this)),
+    m_updatemanager(new UpdateManager(APP_VERSION, APP_VERSION_URL)),
     m_notifier(new NotifierThread(this)),
     m_labelnotification(new QLabel(this)),
     m_dialognotification(new DialogTasksNotification(this))
@@ -424,4 +425,10 @@ void MainWindow::on_taskDroped(int task_id, int project_id)
         emit Bus::instance()->taskUpdated(task_id, project_id, old_project_id);
     }
     delete t;
+}
+
+void MainWindow::on_actionOptions_triggered()
+{
+    DialogOptions dialog(this);
+    dialog.exec();
 }

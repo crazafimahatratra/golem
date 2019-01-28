@@ -7,3 +7,6 @@
 1|ALTER TABLE task ADD COLUMN priority INTEGER;
 1|UPDATE task SET priority=0;
 1|UPDATE version SET version=2;
+2|CREATE TABLE goption(id INTEGER PRIMARY KEY AUTOINCREMENT, check_update BOOLEAN, update_schedule INTEGER, backup BOOLEAN, backup_schedule INTEGER, backup_filenaming INTEGER, backup_path TEXT);
+2|CREATE TABLE history (id INTEGER PRIMARY KEY AUTOINCREMENT, checkupdate DATETIME);
+2|UPDATE version SET version=3;

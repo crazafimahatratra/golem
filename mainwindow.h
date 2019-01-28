@@ -93,6 +93,8 @@ private slots:
 
     void on_taskDroped(int task_id, int project_id);
 
+    void on_actionOptions_triggered();
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;

@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include <QFontDatabase>
+#include <QDebug>
+#include <QLibrary>
 #include "appversion.h"
 #include "qtkit/QSqliteWrapper/version.h"
 
@@ -22,6 +24,7 @@ QByteArray readTextFile(const QString &file_path)
 int main(int argc, char *argv[])
 {
     int currentExitCode = 0;
+    qputenv("QT_BEARER_POLL_TIMEOUT", QByteArray::number(-1));
     do {
         QApplication::setApplicationName(APP_NAME);
         QApplication::setApplicationDisplayName(APP_NAME);

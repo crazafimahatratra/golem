@@ -6,6 +6,7 @@
 #include <QNetworkReply>
 #include <QSslError>
 #include <QThread>
+#include "models/history.h"
 
 /**
  * @brief Checks for update online and then raises a signal if there is any.
@@ -62,10 +63,14 @@ public slots:
      * @param reply : the network reply
      */
     void onFinished(QNetworkReply *reply);
+
+    void onActualStart();
 private:
     QNetworkAccessManager *m_manager;
     QString m_localversion;
     QString m_url;
+    History *m_history;
+    bool canUpdate();
 };
 
 #endif // UPDATEMANAGER_H

@@ -53,7 +53,11 @@ SOURCES += \
     qtkit/WidgetUtils/rtfeditor.cpp \
     qtkit/WidgetUtils/texteditor.cpp \
     mdi/tableevents.cpp \
-    treecollections.cpp
+    treecollections.cpp \
+    dialogs/dialogoptions.cpp \
+    models/goption.cpp \
+    models/history.cpp \
+    backupmanager.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -86,7 +90,11 @@ HEADERS += \
     qtkit/WidgetUtils/rtfeditor.h \
     qtkit/WidgetUtils/texteditor.h \
     mdi/tableevents.h \
-    treecollections.h
+    treecollections.h \
+    dialogs/dialogoptions.h \
+    models/goption.h \
+    models/history.h \
+    backupmanager.h
 
 FORMS += \
         mainwindow.ui \
@@ -99,7 +107,8 @@ FORMS += \
     dialogs/dialogabout.ui \
     dialogs/dialogtasksnotification.ui \
     dialogs/notificationelement.ui \
-    qtkit/WidgetUtils/rtfeditor.ui
+    qtkit/WidgetUtils/rtfeditor.ui \
+    dialogs/dialogoptions.ui
 
 RC_FILE = resources.rc
 
