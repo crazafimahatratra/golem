@@ -56,8 +56,7 @@ SOURCES += \
     treecollections.cpp \
     dialogs/dialogoptions.cpp \
     models/goption.cpp \
-    models/history.cpp \
-    backupmanager.cpp
+    models/history.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -93,8 +92,7 @@ HEADERS += \
     treecollections.h \
     dialogs/dialogoptions.h \
     models/goption.h \
-    models/history.h \
-    backupmanager.h
+    models/history.h
 
 FORMS += \
         mainwindow.ui \
