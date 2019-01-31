@@ -95,6 +95,10 @@ private slots:
 
     void on_actionOptions_triggered();
 
+    void on_actionNewEvent_triggered();
+
+    void on_actionNewTask_triggered();
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;
@@ -113,6 +117,10 @@ private:
     void updateMdiTabbar();
     void openEvents(QDate date);
     QTreeWidgetItem *treeWidgetItemFromValue(QTreeWidgetItem *root, int value);
+    int selectedProjectId();
+    QString selectedProjectLabel();
+    int selectedCollectionId();
+    QString selectedCollectionLabel();
 
     void moveEvent(QMoveEvent *event);
 };

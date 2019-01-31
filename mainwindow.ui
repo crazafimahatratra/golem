@@ -58,6 +58,9 @@
     <addaction name="actionNewCollection"/>
     <addaction name="actionNewProject"/>
     <addaction name="separator"/>
+    <addaction name="actionNewEvent"/>
+    <addaction name="actionNewTask"/>
+    <addaction name="separator"/>
     <addaction name="actionExport_Database"/>
     <addaction name="actionImport_Database"/>
     <addaction name="separator"/>
@@ -108,6 +111,8 @@
    <addaction name="actionEdit_Project"/>
    <addaction name="actionRemove_Project"/>
    <addaction name="separator"/>
+   <addaction name="actionNewEvent"/>
+   <addaction name="actionNewTask"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="dockWidget">
@@ -326,6 +331,24 @@
   <action name="actionOptions">
    <property name="text">
     <string>Options ...</string>
+   </property>
+  </action>
+  <action name="actionNewEvent">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/png/icons/calendar--plus.png</normaloff>:/png/icons/calendar--plus.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Event</string>
+   </property>
+  </action>
+  <action name="actionNewTask">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/png/icons/document--plus.png</normaloff>:/png/icons/document--plus.png</iconset>
+   </property>
+   <property name="text">
+    <string>New Task</string>
    </property>
   </action>
  </widget>

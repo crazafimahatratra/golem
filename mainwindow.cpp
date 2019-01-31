@@ -3,6 +3,7 @@
 #include "dialogs/dialogcollection.h"
 #include "dialogs/dialogproject.h"
 #include "dialogs/dialogevent.h"
+#include "dialogs/dialogtask.h"
 #include "dialogs/dialogabout.h"
 #include "dialogs/dialogoptions.h"
 #include "mdi/mdiproject.h"
@@ -187,11 +188,11 @@ void MainWindow::addEventToTree(QTreeWidgetItem *root, QDate date)
 
 void MainWindow::updateMenus()
 {
-    bool collectionSelected = (ui->treeWidgetCollections->selectedItems().count() > 0) && (ui->treeWidgetCollections->currentItem()->type() == TREEVIEW_TYPE_COLLECTION);
+    bool collectionSelected = selectedCollectionId() > 0;
     ui->actionEdit_Collection->setEnabled(collectionSelected);
     ui->actionRemove_Collection->setEnabled(collectionSelected);
     ui->actionNewProject->setEnabled(collectionSelected);
-    bool projectSelected = (ui->treeWidgetCollections->selectedItems().count() > 0) && (ui->treeWidgetCollections->currentItem()->type() == TREEVIEW_TYPE_PROJECT);
+    bool projectSelected = selectedProjectId() > 0;
     ui->actionEdit_Project->setEnabled(projectSelected);
     ui->actionRemove_Project->setEnabled(projectSelected);
 }
@@ -265,6 +266,42 @@ QTreeWidgetItem *MainWindow::treeWidgetItemFromValue(QTreeWidgetItem *root, int 
     return NULL;
 }
 
+int MainWindow::selectedProjectId()
+{
+    if(!ui->treeWidgetCollections->currentItem())
+        return 0;
+    if(ui->treeWidgetCollections->currentItem()->type() != TREEVIEW_TYPE_PROJECT)
+        return 0;
+    return ui->treeWidgetCollections->currentItem()->data(0, Qt::UserRole).toInt();
+}
+
+QString MainWindow::selectedProjectLabel()
+{
+    if(!ui->treeWidgetCollections->currentItem())
+        return "";
+    if(ui->treeWidgetCollections->currentItem()->type() != TREEVIEW_TYPE_PROJECT)
+        return "";
+    return ui->treeWidgetCollections->currentItem()->text(0);
+}
+
+int MainWindow::selectedCollectionId()
+{
+    if(!ui->treeWidgetCollections->currentItem())
+        return 0;
+    if(ui->treeWidgetCollections->currentItem()->type() != TREEVIEW_TYPE_COLLECTION)
+        return 0;
+    return ui->treeWidgetCollections->currentItem()->data(0, Qt::UserRole).toInt();
+}
+
+QString MainWindow::selectedCollectionLabel()
+{
+    if(!ui->treeWidgetCollections->currentItem())
+        return "";
+    if(ui->treeWidgetCollections->currentItem()->type() != TREEVIEW_TYPE_COLLECTION)
+        return "";
+    return ui->treeWidgetCollections->currentItem()->text(0);
+}
+
 void MainWindow::moveEvent(QMoveEvent *event)
 {
     event->accept();
@@ -283,24 +320,22 @@ void MainWindow::on_treeWidgetCollections_customContextMenuRequested(const QPoin
 
 void MainWindow::on_actionNewProject_triggered()
 {
-    if(!ui->treeWidgetCollections->currentItem())
-        return;
-    int id = ui->treeWidgetCollections->currentItem()->data(0, Qt::UserRole).toInt();
+    int id = selectedCollectionId();
     DialogProject dialog(id, 0, this);
     dialog.exec();
 }
 
 void MainWindow::on_actionEdit_Collection_triggered()
 {
-    int id = ui->treeWidgetCollections->currentItem()->data(0, Qt::UserRole).toInt();
+    int id = selectedCollectionId();
     DialogCollection dialog(id, this);
     dialog.exec();
 }
 
 void MainWindow::on_actionRemove_Collection_triggered()
 {
-    int id = ui->treeWidgetCollections->currentItem()->data(0, Qt::UserRole).toInt();
-    QString label = ui->treeWidgetCollections->currentItem()->text(0);
+    int id = selectedCollectionId();
+    QString label = selectedCollectionLabel();
     int res = QMessageBox::critical(this, "Confirmation", "Delete the collection " + label + ".\n\n"
                                                           "The operation you are going to perform is dangerous.\n"
                                                           "Are you sure ?", QMessageBox::Yes|QMessageBox::No);
@@ -316,15 +351,17 @@ void MainWindow::on_actionRemove_Collection_triggered()
 
 void MainWindow::on_actionEdit_Project_triggered()
 {
-    int id = ui->treeWidgetCollections->currentItem()->data(0, Qt::UserRole).toInt();
+    int id = selectedProjectId();
+    if(!id)
+        return;
     DialogProject dialog(0, id, this);
     dialog.exec();
 }
 
 void MainWindow::on_actionRemove_Project_triggered()
 {
-    int id = ui->treeWidgetCollections->currentItem()->data(0, Qt::UserRole).toInt();
-    QString label = ui->treeWidgetCollections->currentItem()->text(0);
+    int id = selectedProjectId();
+    QString label = selectedProjectLabel();
     int res = QMessageBox::warning(this, "Confirmation", "Delete the project " + label + ".\n\n"
                                                           "The operation you are going to perform is dangerous.\n"
                                                           "Are you sure ?", QMessageBox::Yes|QMessageBox::No);
@@ -430,5 +467,18 @@ void MainWindow::on_taskDroped(int task_id, int project_id)
 void MainWindow::on_actionOptions_triggered()
 {
     DialogOptions dialog(this);
+    dialog.exec();
+}
+
+void MainWindow::on_actionNewEvent_triggered()
+{
+    DialogEvent dialog(0, this);
+    dialog.setSelectedProject(selectedProjectId());
+    dialog.exec();
+}
+
+void MainWindow::on_actionNewTask_triggered()
+{
+    DialogTask dialog(selectedProjectId(), 0, this);
     dialog.exec();
 }
