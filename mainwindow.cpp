@@ -76,6 +76,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addSeparator();
     ui->mainToolBar->addWidget(m_lineEditSearch);
     connect(m_lineEditSearch, &QLineEdit::returnPressed, this, &MainWindow::on_Search);
+    ui->dockWidgetSearch->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -499,5 +500,5 @@ void MainWindow::on_actionNewTask_triggered()
 
 void MainWindow::on_Search()
 {
-
+    ui->dockWidgetSearch->setVisible(true);
 }
