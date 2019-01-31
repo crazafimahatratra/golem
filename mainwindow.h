@@ -7,6 +7,7 @@
 #include <QDateTime>
 #include <QLabel>
 #include <QMoveEvent>
+#include <QLineEdit>
 #include "models/project.h"
 #include "models/task.h"
 #include "updatemanager.h"
@@ -99,6 +100,8 @@ private slots:
 
     void on_actionNewTask_triggered();
 
+    void on_Search();
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;
@@ -108,6 +111,7 @@ private:
     NotifierThread *m_notifier;
     QLabel *m_labelnotification;
     DialogTasksNotification *m_dialognotification;
+    QLineEdit *m_lineEditSearch;
 
     void fillTreeCollections();
     void fillTreeEvents();

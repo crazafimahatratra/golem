@@ -28,7 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_updatemanager(new UpdateManager(APP_VERSION, APP_VERSION_URL)),
     m_notifier(new NotifierThread(this)),
     m_labelnotification(new QLabel(this)),
-    m_dialognotification(new DialogTasksNotification(this))
+    m_dialognotification(new DialogTasksNotification(this)),
+    m_lineEditSearch(new QLineEdit(this))
 {
     ui->setupUi(this);
     this->setWindowState(Qt::WindowMaximized);
@@ -69,6 +70,12 @@ MainWindow::MainWindow(QWidget *parent) :
     m_notifier->start();
 
     connect(ui->treeWidgetCollections, &TreeCollections::taskDroped, this, &MainWindow::on_taskDroped);
+    
+    m_lineEditSearch->setClearButtonEnabled(true);
+    m_lineEditSearch->setPlaceholderText("Search ...");
+    ui->mainToolBar->addSeparator();
+    ui->mainToolBar->addWidget(m_lineEditSearch);
+    connect(m_lineEditSearch, &QLineEdit::returnPressed, this, &MainWindow::on_Search);
 }
 
 MainWindow::~MainWindow()
@@ -76,8 +83,10 @@ MainWindow::~MainWindow()
     delete m_MenuTreeWidgetCollections;
     delete m_MenuTreeWidgetEvents;
     delete m_updatemanager;
+    delete m_notifier;
     delete m_labelnotification;
     delete m_dialognotification;
+    delete m_lineEditSearch;
     delete ui;
 }
 
@@ -486,4 +495,9 @@ void MainWindow::on_actionNewTask_triggered()
 {
     DialogTask dialog(selectedProjectId(), 0, this);
     dialog.exec();
+}
+
+void MainWindow::on_Search()
+{
+
 }
