@@ -3,6 +3,10 @@
 #include "qtkit/QSqliteWrapper/table.h"
 
 using namespace QSqliteWrapper;
+
+/**
+ * @brief The Goption class is a representation of the goption table
+ */
 class Goption : public Table
 {
 public:
@@ -10,27 +14,36 @@ public:
 
     // Table interface
 public:
+    /**
+     * @brief Enumeration of update schedule.
+     */
     enum class UpdateSchedule
     {
-        appStart = 1,
-        daily = 2,
-        weekly = 3,
-        monthly = 4
+        appStart = 1,   ///< Checks for an update everytime the app starts.
+        daily = 2,      ///< Checks for an update every day.
+        weekly = 3,     ///< Checks for an update every monday (week).
+        monthly = 4     ///< Checks for an update every 1st of the month.
     };
 
+    /**
+     * @brief Enumeration for the backup schedule.
+     */
     enum class BackupSchedule
     {
-        appStart = 1,
-        appClose = 2
+        appStart = 1,   ///< Every time the app starts.
+        appClose = 2    ///< Every time the app is about to close.
     };
 
+    /**
+     * @brief The BackupFileNaming enum enumerates the pattern of the file used for backups.
+     */
     enum class BackupFileNaming
     {
-        perMinute = 1,
-        hourly = 2,
-        daily = 3,
-        weekly = 4,
-        monthly = 5
+        perMinute = 1,  ///< yyyyMMdd_HHmm
+        hourly = 2,     ///< yyyyMMdd_HH
+        daily = 3,      ///< yyyyMMdd
+        weekly = 4,     ///< yyyyMMdd_SX
+        monthly = 5     ///< yyyyMM
     };
 
     QString pkName()
@@ -67,12 +80,39 @@ public:
         return params;
     }
 
+    /**
+     * @brief id : primary key.
+     */
     int id;
+
+    /**
+     * @brief checkUpdate : whether checks for update is active or not.
+     */
     bool checkUpdate;
+
+    /**
+     * @brief updateSchedule : when should the app checks for an update.
+     */
     UpdateSchedule updateSchedule;
+
+    /**
+     * @brief backup : if the app should trigger a backup or not.
+     */
     bool backup;
+
+    /**
+     * @brief backupSchedule : when the backup should be triggered.
+     */
     BackupSchedule backupSchedule;
+
+    /**
+     * @brief backupFileNaming : pattern of the backup filename
+     */
     BackupFileNaming backupFileNaming;
+
+    /**
+     * @brief backupPath : path of the automatic update
+     */
     QString backupPath;
 };
 

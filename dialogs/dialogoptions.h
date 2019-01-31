@@ -8,11 +8,18 @@ namespace Ui {
 class DialogOptions;
 }
 
+/**
+ * @brief Ui for Options
+ */
 class DialogOptions : public QDialog
 {
     Q_OBJECT
 
 public:
+    /**
+     * @brief Constructor
+     * @param parent : parent widget
+     */
     explicit DialogOptions(QWidget *parent = 0);
     ~DialogOptions();
 

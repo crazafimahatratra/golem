@@ -35,35 +35,38 @@ public:
 
     /**
      * @brief Starts fetching the current version.
-     * It is called so to be conform with QThread::start()
+     * It is called so to be conform with QThread::start().
      */
     void start();
 
 signals:
     /**
-     * @brief when fetching is started
+     * @brief when fetching is started.
      */
     void fetchStarted();
     /**
-     * @brief raised when the version was fetched successfully
-     * @param newer : true if the online version is newer than the current running version
-     * @param version : the online version fetched
+     * @brief raised when the version was fetched successfully.
+     * @param newer : true if the online version is newer than the current running version.
+     * @param version : the online version fetched.
      */
     void versionFetched(bool newer, QString version);
 
     /**
-     * @brief raised when an error occured during the fetch
+     * @brief raised when an error occured during the fetch.
      * @param error : the error encountered
      */
     void versionFetchError(QString error);
 
 public slots:
     /**
-     * @brief called by the m_manager when the fetch is complete
-     * @param reply : the network reply
+     * @brief called by the m_manager when the fetch is complete.
+     * @param reply : the network reply.
      */
     void onFinished(QNetworkReply *reply);
 
+    /**
+     * @brief onActualStart : the checks for update is actually starting.
+     */
     void onActualStart();
 private:
     QNetworkAccessManager *m_manager;

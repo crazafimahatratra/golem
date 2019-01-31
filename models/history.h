@@ -4,6 +4,10 @@
 #include <QDateTime>
 
 using namespace QSqliteWrapper;
+
+/**
+ * @brief Represents the history table. It holds the informations about the last update.
+ */
 class History : public Table
 {
 public:
@@ -35,9 +39,20 @@ public:
         return parameters;
     }
 
+    /**
+     * @brief gets the current history if any, or returns a default History object.
+     * @return
+     */
     static History *currentHistory();
 
+    /**
+     * @brief id : primary key.
+     */
     int id;
+
+    /**
+     * @brief checkUpdate : the last time the application checks for an update.
+     */
     QDateTime checkUpdate;
 };
 
