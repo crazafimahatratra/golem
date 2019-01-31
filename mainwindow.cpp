@@ -41,6 +41,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_MenuTreeWidgetCollections->addAction(ui->actionNewProject);
     m_MenuTreeWidgetCollections->addAction(ui->actionEdit_Project);
     m_MenuTreeWidgetCollections->addAction(ui->actionRemove_Project);
+    m_MenuTreeWidgetCollections->addSeparator();
+    m_MenuTreeWidgetCollections->addAction(ui->actionNewTask);
+    m_MenuTreeWidgetCollections->addAction(ui->actionNewEvent);
     fillTreeCollections();
 
     fillTreeEvents();
@@ -195,6 +198,8 @@ void MainWindow::updateMenus()
     bool projectSelected = selectedProjectId() > 0;
     ui->actionEdit_Project->setEnabled(projectSelected);
     ui->actionRemove_Project->setEnabled(projectSelected);
+    ui->actionNewTask->setEnabled(projectSelected);
+    ui->actionNewEvent->setEnabled(projectSelected);
 }
 
 void MainWindow::updateMdiTabbar()
