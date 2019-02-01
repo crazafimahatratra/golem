@@ -32,6 +32,7 @@ public:
         this->title = record.value("title").toString();
         this->evedate = record.value("evedate").toDateTime();
         this->content = record.value("content").toString();
+        this->project_name = record.value("project_name").toString();
     }
     QList<QSqliteWrapper::Parameter> prepareParameters()
     {
@@ -68,6 +69,12 @@ public:
      * @brief event content (description or comments)
      */
     QString content;
+
+    /**
+     * @brief name of the project.
+     * @see Project::name
+     */
+    QString project_name;
 
     /**
      * @brief get all dates containing one or more events

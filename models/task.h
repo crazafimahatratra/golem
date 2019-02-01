@@ -43,6 +43,7 @@ public:
         this->dueDate = record.value("duedate").toDateTime();
         this->status = record.value("status").toInt();
         this->priority = record.value("priority").toInt();
+        this->project_name = record.value("project_name").toString();
     }
     QList<QSqliteWrapper::Parameter> prepareParameters()
     {
@@ -104,6 +105,12 @@ public:
      * @brief Task priority
      */
     int priority;
+
+    /**
+     * @brief Name of the project
+     * @see Project::name
+     */
+    QString project_name;
 };
 
 #endif // TASK_H
