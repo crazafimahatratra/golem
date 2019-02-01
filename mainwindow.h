@@ -102,6 +102,8 @@ private slots:
 
     void on_Search();
 
+    void on_actionSearch_triggered();
+
 private:
     Ui::MainWindow *ui;
     QMenu *m_MenuTreeWidgetCollections;

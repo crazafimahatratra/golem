@@ -500,5 +500,17 @@ void MainWindow::on_actionNewTask_triggered()
 
 void MainWindow::on_Search()
 {
+    QString pattern = m_lineEditSearch->text();
+    if(pattern.isEmpty())
+        return;
+    SearchResult *widget = static_cast<SearchResult *>(ui->widgetResult);
+    if(!widget)
+        return;
     ui->dockWidgetSearch->setVisible(true);
+    widget->search(pattern);
+}
+
+void MainWindow::on_actionSearch_triggered()
+{
+    m_lineEditSearch->setFocus();
 }
