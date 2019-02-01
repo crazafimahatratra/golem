@@ -516,6 +516,7 @@ void MainWindow::on_Search()
 void MainWindow::on_actionSearch_triggered()
 {
     m_lineEditSearch->setFocus();
+    m_lineEditSearch->selectAll();
 }
 
 void MainWindow::on_searchResultRowDoubleClicked(SearchResult::SearchType type, int object_id, QString pattern)
