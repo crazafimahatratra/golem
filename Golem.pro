@@ -56,7 +56,8 @@ SOURCES += \
     treecollections.cpp \
     dialogs/dialogoptions.cpp \
     models/goption.cpp \
-    models/history.cpp
+    models/history.cpp \
+    searchresult.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -92,7 +93,8 @@ HEADERS += \
     treecollections.h \
     dialogs/dialogoptions.h \
     models/goption.h \
-    models/history.h
+    models/history.h \
+    searchresult.h
 
 FORMS += \
         mainwindow.ui \
@@ -106,7 +108,8 @@ FORMS += \
     dialogs/dialogtasksnotification.ui \
     dialogs/notificationelement.ui \
     qtkit/WidgetUtils/rtfeditor.ui \
-    dialogs/dialogoptions.ui
+    dialogs/dialogoptions.ui \
+    searchresult.ui
 
 RC_FILE = resources.rc
 
