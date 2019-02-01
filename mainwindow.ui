@@ -75,6 +75,8 @@
     <addaction name="separator"/>
     <addaction name="actionEdit_Project"/>
     <addaction name="actionRemove_Project"/>
+    <addaction name="separator"/>
+    <addaction name="actionSearch"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -249,6 +251,9 @@
      <property name="bottomMargin">
       <number>0</number>
      </property>
+     <item>
+      <widget class="SearchResult" name="widgetResult" native="true"/>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -375,6 +380,18 @@
     <string>New Task</string>
    </property>
   </action>
+  <action name="actionSearch">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/png/icons/magnifier.png</normaloff>:/png/icons/magnifier.png</iconset>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -382,6 +399,12 @@
    <class>TreeCollections</class>
    <extends>QTreeWidget</extends>
    <header>treecollections.h</header>
+  </customwidget>
+  <customwidget>
+   <class>SearchResult</class>
+   <extends>QWidget</extends>
+   <header>searchresult.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>
