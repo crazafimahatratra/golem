@@ -38,6 +38,8 @@
         <file>icons/exclamation-white.png</file>
         <file>icons/16x16-empty.png</file>
         <file>icons/calendar-next.png</file>
+        <file>icons/cross-script.png</file>
+        <file>icons/magnifier.png</file>
     </qresource>
     <qresource prefix="/flat">
         <file>icons/flat/delete.png</file>
