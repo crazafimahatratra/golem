@@ -53,7 +53,7 @@ QList<SearchResult::Result> SearchResult::searchInTasks()
     for(int i = 0; i < rows.length(); i++)
     {
         QString plain = htmlToText(rows[i]->content);
-        if(plain.contains(pattern, Qt::CaseInsensitive))
+        if(plain.contains(pattern, Qt::CaseInsensitive) || rows[i]->title.contains(pattern, Qt::CaseInsensitive))
             results.append(Result(SearchType::Tasks, rows[i]->id, rows[i]->dueDate, rows[i]->project_name, rows[i]->title));
         delete rows[i];
     }
@@ -74,7 +74,7 @@ QList<SearchResult::Result> SearchResult::searchInEvents()
     for(int i = 0; i < rows.length(); i++)
     {
         QString plain = htmlToText(rows[i]->content);
-        if(plain.contains(pattern, Qt::CaseInsensitive))
+        if(plain.contains(pattern, Qt::CaseInsensitive) || rows[i]->title.contains(pattern, Qt::CaseInsensitive))
             results.append(Result(SearchType::Events, rows[i]->id, rows[i]->evedate, rows[i]->project_name, rows[i]->title));
         delete rows[i];
     }
