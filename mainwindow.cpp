@@ -80,6 +80,11 @@ MainWindow::MainWindow(QWidget *parent) :
     SearchResult *widget = static_cast<SearchResult *>(ui->widgetResult);
     if(widget)
         connect(widget, &SearchResult::resultRowDoubleClicked, this, &MainWindow::on_searchResultRowDoubleClicked);
+
+    setCorner(Qt::TopLeftCorner, Qt::LeftDockWidgetArea);
+    setCorner(Qt::BottomLeftCorner, Qt::LeftDockWidgetArea);
+    setCorner(Qt::TopRightCorner, Qt::RightDockWidgetArea);
+    setCorner(Qt::BottomRightCorner, Qt::RightDockWidgetArea);
 }
 
 MainWindow::~MainWindow()
