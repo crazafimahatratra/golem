@@ -13,6 +13,7 @@
 #include "updatemanager.h"
 #include "notifierthread.h"
 #include "dialogs/dialogtasksnotification.h"
+#include "searchresult.h"
 
 /**
  * @namespace Ui Contains all User interfaces classes
@@ -103,6 +104,8 @@ private slots:
     void on_Search();
 
     void on_actionSearch_triggered();
+
+    void on_searchResultRowDoubleClicked(SearchResult::SearchType type, int object_id);
 
 private:
     Ui::MainWindow *ui;

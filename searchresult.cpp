@@ -1,6 +1,7 @@
 #include "searchresult.h"
 #include "ui_searchresult.h"
 #include <QDebug>
+#include <QXmlStreamReader>
 #include "models/event.h"
 #include "models/task.h"
 #include "constants.h"
@@ -51,7 +52,9 @@ QList<SearchResult::Result> SearchResult::searchInTasks()
     QList<Result> results;
     for(int i = 0; i < rows.length(); i++)
     {
-        results.append(Result(SearchType::Tasks, rows[i]->dueDate, rows[i]->project_name, rows[i]->title));
+        QString plain = htmlToText(rows[i]->content);
+        if(plain.contains(pattern, Qt::CaseInsensitive))
+            results.append(Result(SearchType::Tasks, rows[i]->id, rows[i]->dueDate, rows[i]->project_name, rows[i]->title));
         delete rows[i];
     }
     delete model;
@@ -70,11 +73,25 @@ QList<SearchResult::Result> SearchResult::searchInEvents()
     QList<Result> results;
     for(int i = 0; i < rows.length(); i++)
     {
-        results.append(Result(SearchType::Events, rows[i]->evedate, rows[i]->project_name, rows[i]->title));
+        QString plain = htmlToText(rows[i]->content);
+        if(plain.contains(pattern, Qt::CaseInsensitive))
+            results.append(Result(SearchType::Events, rows[i]->id, rows[i]->evedate, rows[i]->project_name, rows[i]->title));
         delete rows[i];
     }
     delete model;
     return results;
+}
+
+QString SearchResult::htmlToText(QString html)
+{
+    QXmlStreamReader xml(html);
+    QString textString;
+    while (!xml.atEnd()) {
+        if ( xml.readNext() == QXmlStreamReader::Characters ) {
+            textString += xml.text();
+        }
+    }
+    return textString;
 }
 
 void SearchResult::addResultsToTree(QList<SearchResult::Result> results)
@@ -92,6 +109,7 @@ void SearchResult::addResultsToTree(QList<SearchResult::Result> results)
         if(root)
         {
             QTreeWidgetItem *child = new QTreeWidgetItem(static_cast<int>(results[i].type));
+            child->setData(0, Qt::UserRole, results[i].id);
             child->setText(0, results[i].date.toString(DATETIME_FORMAT));
             child->setText(1, results[i].column1);
             child->setText(2, results[i].column2);
@@ -123,4 +141,11 @@ void SearchResult::on_lineEditPattern_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty())
         _search();
+}
+
+void SearchResult::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int)
+{
+    SearchType type = static_cast<SearchType>(item->type());
+    int id = item->data(0, Qt::UserRole).toInt();
+    emit this->resultRowDoubleClicked(type, id);
 }

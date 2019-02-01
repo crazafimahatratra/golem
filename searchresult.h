@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QDateTime>
+#include <QTreeWidgetItem>
 
 namespace Ui {
 class SearchResult;
@@ -23,11 +24,13 @@ public:
     {
     public:
         SearchType type;
+        int id;
         QDateTime date;
         QString column1;
         QString column2;
-        Result(SearchType type, QDateTime date, QString column1, QString column2)
+        Result(SearchType type, int id, QDateTime date, QString column1, QString column2)
         {
+            this->id = id;
             this->type = type;
             this->date = date;
             this->column1 = column1;
@@ -38,6 +41,10 @@ public:
     ~SearchResult();
     void search(QString pattern);
     void _search();
+
+signals:
+    void resultRowDoubleClicked(SearchType type, int object_id);
+
 private slots:
     void on_pushButtonClear_clicked();
 
@@ -47,10 +54,13 @@ private slots:
 
     void on_lineEditPattern_textChanged(const QString &arg1);
 
+    void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int);
+
 private:
     Ui::SearchResult *ui;
     QList<Result> searchInTasks();
     QList<Result> searchInEvents();
+    QString htmlToText(QString html);
     void addResultsToTree(QList<Result> results);
 };
 

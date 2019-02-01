@@ -77,6 +77,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->mainToolBar->addWidget(m_lineEditSearch);
     connect(m_lineEditSearch, &QLineEdit::returnPressed, this, &MainWindow::on_Search);
     ui->dockWidgetSearch->setVisible(false);
+    SearchResult *widget = static_cast<SearchResult *>(ui->widgetResult);
+    if(widget)
+        connect(widget, &SearchResult::resultRowDoubleClicked, this, &MainWindow::on_searchResultRowDoubleClicked);
 }
 
 MainWindow::~MainWindow()
@@ -513,4 +516,18 @@ void MainWindow::on_Search()
 void MainWindow::on_actionSearch_triggered()
 {
     m_lineEditSearch->setFocus();
+}
+
+void MainWindow::on_searchResultRowDoubleClicked(SearchResult::SearchType type, int object_id)
+{
+    if(type == SearchResult::SearchType::Events)
+    {
+        DialogEvent dialog(object_id, this);
+        dialog.exec();
+    }
+    if(type == SearchResult::SearchType::Tasks)
+    {
+        DialogTask dialog(0, object_id, this);
+        dialog.exec();
+    }
 }
