@@ -57,7 +57,8 @@ SOURCES += \
     dialogs/dialogoptions.cpp \
     models/goption.cpp \
     models/history.cpp \
-    searchresult.cpp
+    searchresult.cpp \
+    qtkit/WidgetUtils/patternhighlighter.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -94,7 +95,8 @@ HEADERS += \
     dialogs/dialogoptions.h \
     models/goption.h \
     models/history.h \
-    searchresult.h
+    searchresult.h \
+    qtkit/WidgetUtils/patternhighlighter.h
 
 FORMS += \
         mainwindow.ui \

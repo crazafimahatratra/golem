@@ -105,7 +105,7 @@ private slots:
 
     void on_actionSearch_triggered();
 
-    void on_searchResultRowDoubleClicked(SearchResult::SearchType type, int object_id);
+    void on_searchResultRowDoubleClicked(SearchResult::SearchType type, int object_id, QString pattern);
 
 private:
     Ui::MainWindow *ui;

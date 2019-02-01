@@ -52,6 +52,11 @@ DialogTask::DialogTask(int project_id, int task_id, QWidget *parent) :
     }
 }
 
+void DialogTask::highlightSearch(QString pattern)
+{
+    ui->widgetRtfContent->highlightPattern(pattern);
+}
+
 DialogTask::~DialogTask()
 {
     delete ui;

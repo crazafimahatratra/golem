@@ -147,5 +147,5 @@ void SearchResult::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int)
 {
     SearchType type = static_cast<SearchType>(item->type());
     int id = item->data(0, Qt::UserRole).toInt();
-    emit this->resultRowDoubleClicked(type, id);
+    emit this->resultRowDoubleClicked(type, id, ui->lineEditPattern->text());
 }

@@ -28,6 +28,12 @@ public:
      * @param project_id : id of the project to be selected
      */
     void setSelectedProject(int project_id);
+
+    /**
+     * @brief highlight search results.
+     * @param pattern : the pattern
+     */
+    void highlightSearch(QString pattern);
     ~DialogEvent();
 
 private slots:

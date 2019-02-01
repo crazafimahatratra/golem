@@ -43,7 +43,7 @@ public:
     void _search();
 
 signals:
-    void resultRowDoubleClicked(SearchType type, int object_id);
+    void resultRowDoubleClicked(SearchType type, int object_id, QString pattern);
 
 private slots:
     void on_pushButtonClear_clicked();

@@ -45,6 +45,11 @@ void DialogEvent::setSelectedProject(int project_id)
     }
 }
 
+void DialogEvent::highlightSearch(QString pattern)
+{
+    ui->textEditContent->highlightPattern(pattern);
+}
+
 DialogEvent::~DialogEvent()
 {
     delete ui;

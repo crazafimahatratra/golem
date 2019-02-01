@@ -518,16 +518,18 @@ void MainWindow::on_actionSearch_triggered()
     m_lineEditSearch->setFocus();
 }
 
-void MainWindow::on_searchResultRowDoubleClicked(SearchResult::SearchType type, int object_id)
+void MainWindow::on_searchResultRowDoubleClicked(SearchResult::SearchType type, int object_id, QString pattern)
 {
     if(type == SearchResult::SearchType::Events)
     {
         DialogEvent dialog(object_id, this);
+        dialog.highlightSearch(pattern);
         dialog.exec();
     }
     if(type == SearchResult::SearchType::Tasks)
     {
         DialogTask dialog(0, object_id, this);
+        dialog.highlightSearch(pattern);
         dialog.exec();
     }
 }

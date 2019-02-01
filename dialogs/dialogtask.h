@@ -24,6 +24,12 @@ public:
      * @param parent : parent widget
      */
     explicit DialogTask(int project_id, int task_id, QWidget *parent = 0);
+
+    /**
+     * @brief highlight search results.
+     * @param pattern : the pattern
+     */
+    void highlightSearch(QString pattern);
     ~DialogTask();
 
 private slots:
