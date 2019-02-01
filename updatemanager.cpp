@@ -108,12 +108,12 @@ bool UpdateManager::canUpdate()
     if(option->updateSchedule == Goption::UpdateSchedule::weekly)
     {
         qDebug() << "Update weekly" << last;
-        return (last < today && today.day() == 1);
+        return (last < today && today.dayOfWeek() == 1);
     }
     if(option->updateSchedule == Goption::UpdateSchedule::monthly)
     {
         qDebug() << "Update monthly" << last;
-        return (last < today && today.month() == 1);
+        return (last < today && today.day() == 1);
     }
     return false;
 }
